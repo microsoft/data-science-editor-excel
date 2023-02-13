@@ -1,14 +1,17 @@
-import { getDataForAddress, getDataForTable, getSelectedData } from "./xl/data";
-import { createTableForAddress, createTableForSelection, isExistingTable, insertTableFromDataset, DATA_SCIENCE_EXPORT_TABLE } from "./xl/tables";
-import { insertBarChart, clearAllChartsFromActiveSheet } from "./xl/charts";
+import { getDataForTable } from "./xl/data"
+import {
+    insertTableFromDataset,
+    DATA_SCIENCE_EXPORT_TABLE,
+} from "./xl/tables"
+import { insertBarChart, clearAllChartsFromActiveSheet } from "./xl/charts"
 
-const colour = "#107C41";
+const colour = "#107C41"
 
 export type Block = any
 export type DataTable = any
 
-export let currentWorkspace;
-var savedInput = new Map();
+export let currentWorkspace
+var savedInput = new Map()
 
 export const blocks = [
     {
@@ -20,12 +23,12 @@ export const blocks = [
             {
                 type: "jacdac_field_iframe_data_chooser",
                 name: "table name",
-                dataId: "table"
-            }
+                dataId: "table",
+            },
         ],
         nextStatement: "DataScienceStatement",
         dataPreviewField: true,
-        template: "meta"
+        template: "meta",
     },
     {
         kind: "block",
@@ -34,77 +37,79 @@ export const blocks = [
         message0: "bar chart of index %1 value %2 %3 %4",
         args0: [
             {
-                "type": "jacdac_field_data_column_chooser",
-                "name": "index"
-              },
-              {
-                "type": "jacdac_field_data_column_chooser",
-                "name": "value",
-                "dataType": "number"
-              },
-              {
-                "type": "jacdac_field_json_settings",
-                "name": "settings",
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "title": {
-                      "type": "string",
-                      "title": "Chart title"
+                type: "jacdac_field_data_column_chooser",
+                name: "index",
+            },
+            {
+                type: "jacdac_field_data_column_chooser",
+                name: "value",
+                dataType: "number",
+            },
+            {
+                type: "jacdac_field_json_settings",
+                name: "settings",
+                schema: {
+                    type: "object",
+                    properties: {
+                        title: {
+                            type: "string",
+                            title: "Chart title",
+                        },
+                        encoding: {
+                            index: {
+                                title: "Index",
+                                type: "object",
+                                properties: {
+                                    axis: {
+                                        type: "object",
+                                        properties: {
+                                            title: {
+                                                type: "string",
+                                                title: "Title",
+                                            },
+                                        },
+                                    },
+                                },
+                            },
+                            value: {
+                                title: "Value",
+                                type: "object",
+                                properties: {
+                                    scale: {
+                                        type: "object",
+                                        properties: {
+                                            domainMin: {
+                                                type: "number",
+                                                title: "minimum",
+                                                description:
+                                                    "Sets the minimum value in the scale domain",
+                                            },
+                                            domainMax: {
+                                                type: "number",
+                                                title: "maximum",
+                                                description:
+                                                    "Sets the maximum value in the scale domain",
+                                            },
+                                        },
+                                    },
+                                    axis: {
+                                        type: "object",
+                                        properties: {
+                                            title: {
+                                                type: "string",
+                                                title: "Title",
+                                            },
+                                        },
+                                    },
+                                },
+                            },
+                        },
                     },
-                    "encoding": {
-                      "index": {
-                        "title": "Index",
-                        "type": "object",
-                        "properties": {
-                          "axis": {
-                            "type": "object",
-                            "properties": {
-                              "title": {
-                                "type": "string",
-                                "title": "Title"
-                              }
-                            }
-                          }
-                        }
-                      },
-                      "value": {
-                        "title": "Value",
-                        "type": "object",
-                        "properties": {
-                          "scale": {
-                            "type": "object",
-                            "properties": {
-                              "domainMin": {
-                                "type": "number",
-                                "title": "minimum",
-                                "description": "Sets the minimum value in the scale domain"
-                              },
-                              "domainMax": {
-                                "type": "number",
-                                "title": "maximum",
-                                "description": "Sets the maximum value in the scale domain"
-                              }
-                            }
-                          },
-                          "axis": {
-                            "type": "object",
-                            "properties": {
-                              "title": {
-                                "type": "string",
-                                "title": "Title"
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              },
-              {
-                "type": "input_dummy"
-              }
+                },
+            },
+            {
+                type: "input_dummy",
+            },
         ],
         previousStatement: "DataScienceStatement",
         nextStatement: "DataScienceStatement",
@@ -112,9 +117,9 @@ export const blocks = [
         template: "meta",
         inputsInline: false,
         dataPreviewField: false,
-        dsl: "chart"
+        dsl: "chart",
     },
-];
+]
 
 export const category = [
     {
@@ -122,41 +127,40 @@ export const category = [
         name: "Tables",
         colour,
         contents: blocks.map((block) => ({ kind: "block", type: block.type })),
-        order: 100
-    }
-];
+        order: 100,
+    },
+]
 
 export const transforms = {
     excel_import_table: async (b) => {
-        const tableName = b.inputs[0].fields["table name"].value;
+        const tableName = b.inputs[0].fields["table name"].value
         if (!tableName) {
             console.log(`table.load no table selected`)
             return { dataset: [] }
         }
 
-        const dataset = await getDataForTable(tableName);
+        const dataset = await getDataForTable(tableName)
         console.log(`table.load`, { tableName, dataset })
-        if (!dataset)
-            return { warning: "table not found", dataset: [] }
+        if (!dataset) return { warning: "table not found", dataset: [] }
         return { dataset }
     },
     excel_chart_bar: async (b, dataset) => {
-        const index = b.inputs[0].fields["index"].value;
-        const value = b.inputs[0].fields["value"].value;
+        const index = b.inputs[0].fields["index"].value
+        const value = b.inputs[0].fields["value"].value
 
         if (index === undefined || value === undefined) {
             // Waiting for the user to select...
-            return;
+            return
         }
 
         // Clear the charts before we delete the existing chart
         // data source sheet to prevent chart errors.
-        await clearAllChartsFromActiveSheet();
-        await insertTableFromDataset(dataset);
-        insertBarChart(DATA_SCIENCE_EXPORT_TABLE, index, value);
-    }
-};
+        await clearAllChartsFromActiveSheet()
+        await insertTableFromDataset(dataset)
+        insertBarChart(DATA_SCIENCE_EXPORT_TABLE, index, value)
+    },
+}
 
 export const setCurrentWorkspace = (workspace) => {
-    currentWorkspace = workspace;
+    currentWorkspace = workspace
 }

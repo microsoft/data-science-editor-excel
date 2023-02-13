@@ -6,13 +6,26 @@ Contains prototype of Data Scicene Editor Office.js add-in.
 
 1. Download the latest LTS version of [node.js](https://nodejs.org/en/download/).
 1. Install all dependencies.
-    - `npm install`
+
+```bash
+yarn install --frozen-lockfile
+```
 
 ## Build
 
 The following script will build and place assets in the dist directory:
 
-`npm run build`
+```bash
+yarn build
+```
+
+## Lint
+
+Runs prettier over all typescript files
+
+```back
+yarn lint
+```
 
 ## Manual Test
 
