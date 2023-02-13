@@ -1,7 +1,8 @@
 {
   "name": "data-editor-hackathon-2021",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "description": "TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project.",
+  "private": true,
   "main": "index.js",
   "browserslist": [
     "supports es6-module",
