@@ -1,19 +1,29 @@
 <!DOCTYPE html>
 <html>
+    <head>
+        <meta charset="utf-8" />
+        <meta content="ie=edge" http-equiv="x-ua-compatible" />
+        <title><%= htmlWebpackPlugin.options.title %></title>
+    </head>
 
-<head>
-    <meta charset="utf-8">
-    <meta content="ie=edge" http-equiv="x-ua-compatible">
-    <title><%= htmlWebpackPlugin.options.title %></title>
-</head>
-
-<body>
-    <script type="text/javascript" src="https://appsforoffice.microsoft.com/lib/beta/hosted/excel.js"></script>
-    <iframe
-        id="dseditor"
-        src="https://microsoft.github.io/jacdac-docs/editors/data/?embed=1&dataset=0&datavar=0&webusb=0&webserial=0&webble=0&storage=0&bus=0" style="margin: 0; border: none; width:100%; height:100%; position:absolute; left: 0; top: 0;"
-    >
-    </iframe>
-</body>
-
+    <body>
+        <script
+            type="text/javascript"
+            src="https://appsforoffice.microsoft.com/lib/beta/hosted/excel.js"
+        ></script>
+        <iframe
+            id="dseditor"
+            src="https://microsoft.github.io/jacdac-docs/editors/data/?embed=1&dataset=0&datavar=0&webusb=0&webserial=0&webble=0&storage=0&bus=0"
+            style="
+                margin: 0;
+                border: none;
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                left: 0;
+                top: 0;
+            "
+        >
+        </iframe>
+    </body>
 </html>
