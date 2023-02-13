@@ -1,6 +1,6 @@
 # Data Science Editor
 
-Contains prototype of Data Scicene Editor Office.js add-in.
+Contains prototype of Data Science Editor Office.js add-in.
 
 ## Getting Started
 
@@ -33,6 +33,23 @@ npm run lint
     - `npm run dev-server`
 1. [Manually sideload the add-in to Office on the web](https://learn.microsoft.com/en-us/office/dev/add-ins/testing/sideload-office-add-ins-for-testing#manually-sideload-an-add-in-to-office-on-the-web)
 1. select `manifest-local.xml`
+
+## Layout
+
+Layout of folders
+
+- __src__
+    - source code for the add-in
+- __listing__
+    - descriptions for the add-in store listing
+    - __statements__
+    - statements that must be linked to the add-in store listing
+
+## Architecture
+
+This add-in is a host to an iframe that holds the data science editor. This Add-In provides the interface to allow the data-science editor to interact with Excel.
+
+This add-in is complete static and hosted on a github pages site.
 
 ## Hosted Site
 
