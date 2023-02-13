@@ -45,6 +45,12 @@ Layout of folders
     - __statements__
     - statements that must be linked to the add-in store listing
 
+## Architecture
+
+This add-in is a host to an iframe that holds the data science editor. This Add-In provides the interface to allow the data-science editor to interact with Excel.
+
+This add-in is complete static and hosted on a github pages site.
+
 ## Hosted Site
 
 A pipeline is configured to build and deploy to an Azure Static Web App site on each merge into `main`.  The pipeline file is `pipelines\build_and_deploy_to_static_app.yaml`.
