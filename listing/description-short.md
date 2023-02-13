@@ -1,5 +1,3 @@
-Quickly find rhymes for English words. Unlock your creative potential and unleash your inner poet!
+Data Science Editor
 
-Quickly rhyme English words.
-
-Unleash your creative potential!
+Drag and drop editor to analyze and chart data.
