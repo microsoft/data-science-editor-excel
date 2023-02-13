@@ -1,6 +1,6 @@
 # Data Science Editor
 
-Contains prototype of Data Scicene Editor Office.js add-in.
+Contains prototype of Data Science Editor Office.js add-in.
 
 ## Getting Started
 
@@ -8,7 +8,7 @@ Contains prototype of Data Scicene Editor Office.js add-in.
 1. Install all dependencies.
 
 ```bash
-yarn install --frozen-lockfile
+npm install
 ```
 
 ## Build
@@ -16,7 +16,7 @@ yarn install --frozen-lockfile
 The following script will build and place assets in the dist directory:
 
 ```bash
-yarn build
+npm build
 ```
 
 ## Lint
@@ -24,7 +24,7 @@ yarn build
 Runs prettier over all typescript files
 
 ```back
-yarn lint
+npm lint
 ```
 
 ## Manual Test
@@ -33,6 +33,17 @@ yarn lint
     - `npm run dev-server`
 1. [Manually sideload the add-in to Office on the web](https://learn.microsoft.com/en-us/office/dev/add-ins/testing/sideload-office-add-ins-for-testing#manually-sideload-an-add-in-to-office-on-the-web)
 1. select `manifest.xml`
+
+## Layout
+
+Layout of folders
+
+- __src__
+    - source code for the add-in
+- __listing__
+    - descriptions for the add-in store listing
+    - __statements__
+    - statements that must be linked to the add-in store listing
 
 ## Hosted Site
 
