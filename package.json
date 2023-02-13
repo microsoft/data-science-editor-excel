@@ -19,11 +19,8 @@
     "type": "git",
     "url": "git+https://github.com/microsoft/data-science-editor-excel.git"
   },
-  "author": {
-    "name": "wandyezj",
-    "url": "http://wandyez.github.io/"
-  },
-  "license": "Unlicense",
+  "author": "Microsoft",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/microsoft/data-science-editor-excel/issues"
   },

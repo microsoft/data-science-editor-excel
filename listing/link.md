@@ -4,8 +4,8 @@
 
 ## Statements
 
-[license](https://support.office.com/client/61994a3b-2c87-41c4-a88d-a6455efa362d?omkt=en-US&ClientSessionId=698b2a99-18aa-4985-a06e-7be42f004e26)
+[license](https://github.com/microsoft/data-science-editor/blob/main/LICENSE)
 
-[privacy](https://word-rhyme.azurewebsites.net/statements/privacy.md)
+[privacy](https://privacy.microsoft.com/en-us/privacystatement)
 
-[support](https://word-rhyme.azurewebsites.net/statements/support.md)
+[support](https://github.com/microsoft/data-science-editor/issues)
