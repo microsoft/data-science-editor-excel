@@ -1,0 +1,80 @@
+{
+    "root": true,
+    "env": {
+        "browser": true,
+        "node": true,
+        "es2021": true
+    },
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "ecmaVersion": 12,
+        "sourceType": "module"
+    },
+    "plugins": ["@typescript-eslint"],
+    "extends": ["eslint:recommended", "plugin:@typescript-eslint/recommended"],
+    "rules": {
+
+        // https://eslint.org/docs/latest/rules/eqeqeq
+        // poka-yoke
+        "eqeqeq": ["error", "always"],
+
+        // Indent is enforced by prettier
+        "indent": "off",
+        "linebreak-style": ["warn", "unix"],
+
+        // https://eslint.org/docs/latest/rules/quotes
+        // consistency
+        "quotes": [
+            "warn",
+            "double",
+            { "allowTemplateLiterals": true, "avoidEscape": true }
+        ],
+
+        // https://eslint.org/docs/latest/rules/semi
+        // poka-yoke
+        "semi": ["warn", "always"],
+        "no-debugger": "warn",
+
+        //
+        // Es Lint Rules
+        //
+
+        // https://typescript-eslint.io/rules/no-inferrable-types/
+        // disable - sometimes want to explicitly define types.
+        "@typescript-eslint/no-inferrable-types": 0,
+
+        // https://typescript-eslint.io/rules/no-var-requires/
+        // disable - require is used in node js scripts
+        "@typescript-eslint/no-var-requires": 0,
+
+        // https://typescript-eslint.io/rules/naming-convention/
+        // consistency
+        "@typescript-eslint/naming-convention": [
+            "warn",
+            {
+                "selector": ["default"],
+                "format": ["strictCamelCase"],
+                "leadingUnderscore": "forbid",
+                "trailingUnderscore": "forbid"
+            },
+            {
+                "selector": "enumMember",
+                "format": ["PascalCase"],
+                "leadingUnderscore": "forbid",
+                "trailingUnderscore": "forbid"
+            },
+            {
+                "selector": ["typeLike"],
+                "format": ["PascalCase"]
+            },
+            {
+                "selector": ["interface"],
+                "format": ["PascalCase"],
+                "custom": {
+                    "regex": "^I[A-Z]",
+                    "match": false
+                }
+            }
+        ]
+    }
+}

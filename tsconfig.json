@@ -1,10 +1,10 @@
 {
     "compilerOptions": {
       "baseUrl": ".",
-      "outDir": "lib",
+      "outDir": "./dist",
       "module": "commonjs",
-      "target": "es5",
-      "declaration": true,
+      "target": "es2020",
+      "declaration": false,
       "sourceMap": true,
       "experimentalDecorators": true,
       "noEmitOnError": true,
@@ -24,7 +24,5 @@
     "exclude": [
       "node_modules",
       "dist",
-      "lib",
-      "lib-amd"
     ]
   }

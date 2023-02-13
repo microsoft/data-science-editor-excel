@@ -1,0 +1,45 @@
+{
+    "files.eol": "\n",
+    "editor.renderWhitespace": "all",
+    "terminal.integrated.defaultProfile.windows": "Command Prompt",
+    "extensions.ignoreRecommendations": true,
+    "files.associations": { "*.json": "jsonc" },
+
+    "editor.bracketPairColorization.enabled": true,
+    "editor.guides.bracketPairs": "active",
+
+    "[html]": {
+        "editor.defaultFormatter": "vscode.html-language-features"
+    },
+    "[typescript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.formatOnSave": true
+    },
+    "[json]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.formatOnSave": true
+    },
+    "[javascript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.formatOnSave": true
+    },
+    "[jsonc]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.formatOnSave": true
+    },
+
+    "prettier.configPath": "config/prettier.json",
+
+    "eslint.options": {
+        "configFile": "config/eslint.json",
+        "resolvePluginsRelativeTo": "${workspaceFolder}"
+    },
+
+    "markdownlint.config": {
+        "extends": "./config/markdownlint.json"
+    },
+
+    "files.exclude": {
+        "node_modules": true
+    }
+}
