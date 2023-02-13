@@ -1,7 +1,7 @@
 {
-  "name": "data-editor-hackathon-2021",
+  "name": "data-science-editor-excel",
   "version": "0.0.0",
-  "description": "TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project.",
+  "description": "A Visual block based Data Transformer pipeline for excel.",
   "private": true,
   "main": "index.js",
   "browserslist": [
@@ -16,10 +16,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://office@dev.azure.com/office/Hackathon/_git/Data%20Editor%20Hackathon%202021"
+    "url": "git+https://github.com/microsoft/data-science-editor-excel.git"
   },
-  "author": "",
+  "author": {
+    "name": "wandyezj",
+    "url": "http://wandyez.github.io/"
+  },
   "license": "Unlicense",
+  "bugs": {
+    "url": "https://github.com/microsoft/data-science-editor-excel/issues"
+  },
   "dependencies": {},
   "devDependencies": {
     "@types/office-js": "^1.0.315",
