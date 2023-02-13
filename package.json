@@ -1,0 +1,35 @@
+{
+  "name": "data-editor-hackathon-2021",
+  "version": "1.0.0",
+  "description": "TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project.",
+  "main": "index.js",
+  "browserslist": [
+    "supports es6-module",
+    "Edge > 80",
+    "Chrome > 80",
+    "Firefox > 80"
+  ],
+  "scripts": {
+    "build": "webpack",
+    "dev-server": "webpack-dev-server --mode development"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://office@dev.azure.com/office/Hackathon/_git/Data%20Editor%20Hackathon%202021"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {},
+  "devDependencies": {
+    "@types/office-js": "^1.0.208",
+    "clean-webpack-plugin": "^4.0.0",
+    "html-webpack-plugin": "^3.2.0",
+    "html-webpack-template": "^6.2.0",
+    "office-addin-dev-certs": "^1.7.0",
+    "ts-loader": "^7.0.5",
+    "typescript": "^4.4.3",
+    "webpack": "^4.7.0",
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.11.0"
+  }
+}

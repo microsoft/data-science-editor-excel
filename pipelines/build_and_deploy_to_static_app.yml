@@ -1,0 +1,58 @@
+trigger:
+  - main
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+  - checkout: self
+    submodules: true
+  - task: NodeTool@0
+    inputs:
+      versionSpec: '14.x'
+    displayName: 'Install Node.js'
+
+  - task: npmAuthenticate@0
+    displayName: 'npm Authenticate .npmrc'
+    inputs:
+      workingFile: .npmrc
+      
+  - task: Npm@1
+    displayName: 'npm install'
+    inputs:
+      command: install
+
+  - task: Npm@1
+    displayName: 'npm run build'
+    inputs:
+      command: custom
+      verbose: false
+      customCommand: 'run build'
+
+  - task: CopyFiles@2
+    displayName: 'Copying Images to dist folder'
+    inputs:
+      Contents: 'Images/**'
+      TargetFolder: 'dist'
+      Overwrite: true
+
+  - task: CopyFiles@2    
+    displayName: "Copy instructions.html"
+    inputs:
+      Contents: 'src/instructions/instructions.html'
+      TargetFolder: 'dist'
+      OverWrite: true
+      flattenFolders: true
+
+  - task: CopyFiles@2
+    displayName: "Copy hosted files"
+    inputs:
+      Contents: 'hosted_files/**'
+      TargetFolder: 'dist'
+      OverWrite: true
+
+  - task: AzureStaticWebApp@0
+    inputs:
+      app_location: '/dist'
+      skip_app_build: true
+      azure_static_web_apps_api_token: '$(deployment_token)'
