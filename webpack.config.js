@@ -1,4 +1,5 @@
 const path = require("path");
+const CopyWebpackPlugin = require("copy-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const devCerts = require("office-addin-dev-certs");
@@ -38,6 +39,14 @@ module.exports = async () => ({
           title: "Data Science Editor",
           template: "index.ejs"
         }),
+        new CopyWebpackPlugin({
+            patterns: [
+                {from: "Images", to:""},
+                {from: "listing/statements/*.md", to:"statements"},
+                {from: "src/instructions/*.html", to:""},
+                {from: "hosted_files/*", to:""},
+            ]
+        })
     ],
     devServer: {
         headers: {
