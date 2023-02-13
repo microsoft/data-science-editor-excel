@@ -8,7 +8,7 @@ Contains prototype of Data Scicene Editor Office.js add-in.
 1. Install all dependencies.
 
 ```bash
-yarn install --frozen-lockfile
+npm run install
 ```
 
 ## Build
@@ -16,7 +16,7 @@ yarn install --frozen-lockfile
 The following script will build and place assets in the dist directory:
 
 ```bash
-yarn build
+npm run build
 ```
 
 ## Lint
@@ -24,7 +24,7 @@ yarn build
 Runs prettier over all typescript files
 
 ```back
-yarn lint
+npm run lint
 ```
 
 ## Manual Test
