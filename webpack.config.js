@@ -1,17 +1,10 @@
 const path = require("path");
+const CopyWebpackPlugin = require("copy-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const devCerts = require("office-addin-dev-certs");
 
-async function getHttpsOptions() {
-    const options = await devCerts.getHttpsServerOptions();
-    
-    return {
-        cacert: options.ca,
-        key: options.key,
-        cert: options.cert
-    };
-}
+
 
 module.exports = async () => ({
     mode: "development",
@@ -38,6 +31,14 @@ module.exports = async () => ({
           title: "Data Science Editor",
           template: "index.ejs"
         }),
+        new CopyWebpackPlugin({
+            patterns: [
+                {from: "Images", to:""},
+                {from: "listing/statements/*.md", to:"statements"},
+                {from: "src/instructions/*.html", to:""},
+                {from: "hosted_files/*", to:""},
+            ]
+        })
     ],
     devServer: {
         headers: {
@@ -47,3 +48,13 @@ module.exports = async () => ({
         port: 8080
     }
 });
+
+async function getHttpsOptions() {
+    const options = await devCerts.getHttpsServerOptions();
+    
+    return {
+        cacert: options.ca,
+        key: options.key,
+        cert: options.cert
+    };
+}
