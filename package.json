@@ -1,7 +1,8 @@
 {
-  "name": "data-editor-hackathon-2021",
-  "version": "1.0.0",
-  "description": "TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project.",
+  "name": "data-science-editor-excel",
+  "version": "0.0.0",
+  "description": "A Visual block based Data Transformer pipeline for excel.",
+  "private": true,
   "main": "index.js",
   "browserslist": [
     "supports es6-module",
@@ -15,21 +16,26 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://office@dev.azure.com/office/Hackathon/_git/Data%20Editor%20Hackathon%202021"
+    "url": "git+https://github.com/microsoft/data-science-editor-excel.git"
   },
-  "author": "",
-  "license": "ISC",
+  "author": {
+    "name": "wandyezj",
+    "url": "http://wandyez.github.io/"
+  },
+  "license": "Unlicense",
+  "bugs": {
+    "url": "https://github.com/microsoft/data-science-editor-excel/issues"
+  },
   "dependencies": {},
   "devDependencies": {
-    "@types/office-js": "^1.0.208",
+    "@types/office-js": "^1.0.315",
+    "office-addin-dev-certs": "^1.11.1",
     "clean-webpack-plugin": "^4.0.0",
-    "html-webpack-plugin": "^3.2.0",
-    "html-webpack-template": "^6.2.0",
-    "office-addin-dev-certs": "^1.7.0",
-    "ts-loader": "^7.0.5",
-    "typescript": "^4.4.3",
-    "webpack": "^4.7.0",
-    "webpack-cli": "^3.3.10",
-    "webpack-dev-server": "^3.11.0"
+    "html-webpack-plugin": "^4.5.0",
+    "ts-loader": "^9.4.2",
+    "typescript": "^4.9.5",
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.1",
+    "webpack-dev-server": "^4.11.0"
   }
 }
