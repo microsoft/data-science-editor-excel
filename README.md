@@ -4,10 +4,7 @@ Contains prototype of Data Scicene Editor Office.js add-in.
 
 ## Getting Started
 
-1. Download the latest version of [node.js](https://nodejs.org/en/download/).
-1. Allow for authentication with VSO.
-    - `npm install -g vsts-npm-auth`
-    - `vsts-npm-auth -config .npmrc`
+1. Download the latest LTS version of [node.js](https://nodejs.org/en/download/).
 1. Install all dependencies.
     - `npm install`
 
@@ -21,7 +18,8 @@ The following script will build and place assets in the dist directory:
 
 1. Run the following script to start the dev server:
     - `npm run dev-server`
-1. Follow these [instructions](https://docs.microsoft.com/en-us/office/dev/add-ins/testing/create-a-network-shared-folder-catalog-for-task-pane-and-content-add-ins) to allow Office to sideload the add-in. Use the root of this repo as the trusted location.
+1. [Manually sideload the add-in to Office on the web](https://learn.microsoft.com/en-us/office/dev/add-ins/testing/sideload-office-add-ins-for-testing#manually-sideload-an-add-in-to-office-on-the-web)
+1. select `manifest.xml`
 
 ## Hosted Site
 
