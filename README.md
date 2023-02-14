@@ -1,10 +1,16 @@
 # Data Science Editor
 
-Contains prototype of Data Science Editor Office.js add-in.
+Prototype integration of the [Data Science Editor](https://microsoft.github.io/data-scienc-editor/) in Office for the Web.
 
 ![A gif showcasing the app in action.](https://microsoft.github.io/data-science-editor-excel/hosted_files/editorHowTo.gif)
 
-## Getting Started
+## Developer Zone
+
+These instructions will show you how to build and debug the Office App locally.
+
+### Getting Started
+
+These instructions have been tested on Windows only.
 
 1. Download the latest LTS version of [node.js](https://nodejs.org/en/download/).
 1. Install all dependencies.
@@ -13,7 +19,7 @@ Contains prototype of Data Science Editor Office.js add-in.
 npm run install
 ```
 
-## Build
+### Build
 
 The following script will build and place assets in the dist directory:
 
@@ -21,7 +27,7 @@ The following script will build and place assets in the dist directory:
 npm run build
 ```
 
-## Lint
+### Lint
 
 Runs prettier over all typescript files
 
@@ -29,23 +35,28 @@ Runs prettier over all typescript files
 npm run lint
 ```
 
-## Manual Test
+### Manual Test
 
 1. Run the following script to start the dev server:
     - `npm run dev-server`
 1. [Manually sideload the add-in to Office on the web](https://learn.microsoft.com/en-us/office/dev/add-ins/testing/sideload-office-add-ins-for-testing#manually-sideload-an-add-in-to-office-on-the-web)
 1. select `manifest-local.xml`
 
-## Layout
+### Layout
 
 Layout of folders
 
-- __src__
-    - source code for the add-in
-- __listing__
-    - descriptions for the add-in store listing
-    - __statements__
-    - statements that must be linked to the add-in store listing
+-   **src**
+    -   source code for the add-in
+-   **listing**
+    -   descriptions for the add-in store listing
+    -   **statements**
+    -   statements that must be linked to the add-in store listing
+
+## Testing the hosted data science editor locally
+
+-   clone https://github.com/microsoft/data-science-editor and follow instructions to launch dev server
+-   update `localhost` to true in webpack.config.js and rebuild
 
 ## Architecture
 
@@ -53,14 +64,9 @@ This add-in is a host to an iframe that holds the data science editor. This Add-
 
 This add-in is complete static and hosted on a github pages site.
 
-## Testing the hosted data science editor locally
-
-- clone https://github.com/microsoft/data-science-editor and follow instructions to launch dev server
-- update `localhost` to true in webpack.config.js and rebuild
-
 ## TODOs
 
-- [ ] detect changes in worksheet and notify blocks to recompute
-- [ ] somehow 1 block workspace per worksheet (low pri)
-- [ ] fix the editor CSS so that it uses the whole screen
-- [ ] match the color scheme looks to Excel?
+-   [ ] detect changes in worksheet and notify blocks to recompute
+-   [ ] somehow 1 block workspace per worksheet (low pri)
+-   [ ] fix the editor CSS so that it uses the whole screen
+-   [ ] match the color scheme looks to Excel?
