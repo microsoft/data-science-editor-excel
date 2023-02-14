@@ -1,30 +1,22 @@
-import { saveSetting, loadSetting, SettingsKey } from "./xl/storage"
-import {
-    blocks,
-    category,
-    transforms,
-    setCurrentWorkspace,
-} from "./blocks"
-import { getAllTables } from "./xl/tables"
-
-;(() => {
-    const dseditor = document.getElementById("dseditor") as HTMLIFrameElement
-    const post = (
-        payload: { type: "dsl"; action: string; dslid: string } & any
-    ) => {
-        console.debug(`data blocks send`, payload)
-        dseditor.contentWindow.postMessage(payload, "*")
-    }
+import { saveSetting, loadSetting, SettingsKey } from "./xl/storage";
+import { blocks, category, transforms, setCurrentWorkspace } from "./blocks";
+import { getAllTables } from "./xl/tables";
+(() => {
+    const dseditor = document.getElementById("dseditor") as HTMLIFrameElement;
+    const post = (payload: { type: "dsl"; action: string; dslid: string } & any) => {
+        console.debug(`data blocks send`, payload);
+        dseditor.contentWindow.postMessage(payload, "*");
+    };
     const postTables = async () => {
-        let table: [string, string][] = []
+        const table: [string, string][] = [];
         await Excel.run(async (context) => {
-            const tables = await getAllTables()
-            for (let t of tables) {
+            const tables = await getAllTables();
+            for (const t of tables) {
                 if (t.name.charAt(0) !== "_") {
-                    table.push([t.name, t.name])
+                    table.push([t.name, t.name]);
                 }
             }
-        })
+        });
 
         post({
             type: "dsl",
@@ -33,135 +25,132 @@ import { getAllTables } from "./xl/tables"
             options: {
                 table,
             },
-        })
-    }
+        });
+    };
     const handleBlocks = async (data) => {
-        console.log(`hostdsl: sending blocks`)
-        post({ ...data, blocks, category })
-    }
+        console.log(`hostdsl: sending blocks`);
+        post({ ...data, blocks, category });
+    };
     const handleTransform = async (data) => {
-        const { blockId, workspace, dataset, ...rest } = data
-        let result: {}
-        const block = workspace.blocks.find((b) => b.id === blockId)
+        const { blockId, workspace, dataset, ...rest } = data;
+        let result: object;
+        const block = workspace.blocks.find((b) => b.id === blockId);
         if (!block) {
-            console.error(`block ${blockId} not found in workspace`)
-            result = { warning: "block lost" }
+            console.error(`block ${blockId} not found in workspace`);
+            result = { warning: "block lost" };
         } else {
-            const transform = transforms[block.type]
-            result = await transform(block, dataset)
+            const transform = transforms[block.type];
+            result = await transform(block, dataset);
         }
-        post({ ...rest, ...(result || {}) })
-    }
+        post({ ...rest, ...(result || {}) });
+    };
     // editor identifier sent by the embedded block editor
-    let currentDslId
-    let loaded = false
-    let pendingLoad: { editor: string; xml: string; json: object }
+    let currentDslId;
+    let loaded = false;
+    let pendingLoad: { editor: string; xml: string; json: object };
 
     const tryloading = async () => {
-        if (!pendingLoad || !currentDslId) return
+        if (!pendingLoad || !currentDslId) return;
 
-        const { editor, xml, json } = pendingLoad
-        console.log(`settings.sending`, { editor, xml, json })
-        pendingLoad = undefined
-        await postTables()
+        const { editor, xml, json } = pendingLoad;
+        console.log(`settings.sending`, { editor, xml, json });
+        pendingLoad = undefined;
+        await postTables();
         post({
             type: "dsl",
             action: "load",
             editor,
             xml,
             json,
-        })
-    }
+        });
+    };
 
     Office.onReady(() => {
         loadSetting(SettingsKey.EditorSaveData).then((setting) => {
-            loaded = true
+            loaded = true;
             if (!setting) {
-                console.log(`settings.none`)
-                return
+                console.log(`settings.none`);
+                return;
             }
 
-            const parsed = JSON.parse(setting)
-            pendingLoad = parsed
-            console.log(`settings.found`, { toLoad: pendingLoad, setting })
-            tryloading()
-        })
+            const parsed = JSON.parse(setting);
+            pendingLoad = parsed;
+            console.log(`settings.found`, { toLoad: pendingLoad, setting });
+            tryloading();
+        });
 
         window.addEventListener(
             "message",
             (msg: MessageEvent) => {
-                const { data } = msg
-                if (data.type !== "dsl") return
-                const { dslid, action } = data
-                console.log(action, data)
+                const { data } = msg;
+                if (data.type !== "dsl") return;
+                const { dslid, action } = data;
+                console.log(action, data);
                 switch (action) {
                     case "mount": {
-                        currentDslId = dslid
-                        console.log(`dslid: ${dslid}`)
-                        tryloading()
-                        break
+                        currentDslId = dslid;
+                        console.log(`dslid: ${dslid}`);
+                        tryloading();
+                        break;
                     }
                     case "unmount": {
-                        currentDslId = undefined
-                        break
+                        currentDslId = undefined;
+                        break;
                     }
                     case "blocks": {
-                        handleBlocks(data)
-                        break
+                        handleBlocks(data);
+                        break;
                     }
                     case "transform": {
-                        handleTransform(data)
-                        break
+                        handleTransform(data);
+                        break;
                     }
                     case "workspace": {
-                        const { workspace, ...rest } = data
-                        setCurrentWorkspace(workspace)
-                        break
+                        const { workspace, ...rest } = data;
+                        setCurrentWorkspace(workspace);
+                        break;
                     }
                     case "save": {
                         // don't save until we've reloaded our content from excel
                         if (!loaded) {
-                            console.log(`save.ignore: not loaded yet`)
-                            break
+                            console.log(`save.ignore: not loaded yet`);
+                            break;
                         }
 
-                        const { editor, xml, json } = data
+                        const { editor, xml, json } = data;
                         const file = {
                             editor,
                             xml,
                             json,
-                        }
-                        saveSetting(
-                            SettingsKey.EditorSaveData,
-                            JSON.stringify(file)
-                        )
-                        break
+                        };
+                        saveSetting(SettingsKey.EditorSaveData, JSON.stringify(file));
+                        break;
                     }
                     case "change": {
-                        handleTransform(data)
-                        break
+                        handleTransform(data);
+                        break;
                     }
                 }
             },
             false
-        )
+        );
 
         Excel.run(async (context) => {
-            console.log(`dsl: initializing`)
-            context.workbook.tables.onChanged.add(onTableChanged)
-            await context.sync()
-            console.log(`dsl: initialized`)
-        })
-    })
+            console.log(`dsl: initializing`);
+            context.workbook.tables.onChanged.add(onTableChanged);
+            await context.sync();
+            console.log(`dsl: initialized`);
+        });
+    });
 
     async function onTableChanged(eventArgs: Excel.TableChangedEventArgs) {
-        await postTables()
+        await postTables();
         await Excel.run(async (context) => {
-            const sheet = context.workbook.worksheets.getActiveWorksheet()
-            const table = sheet.tables.getItem(eventArgs.tableId)
-            sheet.load("id")
-            table.load("name")
-            await context.sync()
+            const sheet = context.workbook.worksheets.getActiveWorksheet();
+            const table = sheet.tables.getItem(eventArgs.tableId);
+            sheet.load("id");
+            table.load("name");
+            await context.sync();
 
             // Only track changes to tables on the active sheet
             if (
@@ -173,8 +162,8 @@ import { getAllTables } from "./xl/tables"
                     type: "dsl",
                     dslid: currentDslId,
                     action: "change",
-                })
+                });
             }
-        })
+        });
     }
-})()
+})();
