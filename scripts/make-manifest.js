@@ -27,6 +27,9 @@ function production(data) {
         "https://localhost:8080/",
         "https://microsoft.github.io/data-science-editor-excel/"
     );
+
+    // for production remove local prefix
+    data = data.replaceAll("(local) Data Science Editor", "Data Science Editor")
     return clean(data);
 }
 
