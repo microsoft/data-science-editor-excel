@@ -4,7 +4,7 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const devCerts = require("office-addin-dev-certs");
 
-const localhost = true;
+const localhost = false;
 const domain = localhost
     ? "http://127.0.0.1:8000/"
     : "https://microsoft.github.io/data-science-editor/";
