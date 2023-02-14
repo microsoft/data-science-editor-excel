@@ -36,9 +36,9 @@ module.exports = async () => ({
         }),
         new CopyWebpackPlugin({
             patterns: [
-                { from: "Images/*", to: "" },
                 { from: "listing/about.md", to: "" },
                 { from: "hosted_files/*", to: "" },
+                { from: "assets/*.png", to: "" },
             ],
         }),
     ],
@@ -46,7 +46,10 @@ module.exports = async () => ({
         headers: {
             "Access-Control-Allow-Origin": "*",
         },
-        https: await getHttpsOptions(),
+        https: async () => {
+            // wrapped in a function so this is only called when running the dev-server
+            return await getHttpsOptions();
+        },
         port: 8080,
     },
 });

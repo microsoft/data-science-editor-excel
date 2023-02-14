@@ -11,7 +11,7 @@
 	<DisplayName DefaultValue="Data Science Editor" />
 	<Description DefaultValue="Data Science Editor" />
 	<!-- Icon for your add-in. Used on installation screens and the add-ins dialog. -->
-	<IconUrl DefaultValue="https://localhost:8080/Images/Button32x32.png" />
+	<IconUrl DefaultValue="https://localhost:8080/assets/icon-32.png" />
 	<!--End Basic Settings. -->
 	<!--Begin TaskPane Mode integration. This section is used if there are no VersionOverrides or if the Office client version does not support add-in commands. -->
 	<Hosts>
@@ -85,9 +85,9 @@
 		<!-- You can use resources across hosts and form factors. -->
 		<Resources>
 			<bt:Images>
-				<bt:Image id="DSEditor.tpicon_16x16" DefaultValue="https://localhost:8080/Images/Button16x16.png" />
-				<bt:Image id="DSEditor.tpicon_32x32" DefaultValue="https://localhost:8080/Images/Button32x32.png" />
-				<bt:Image id="DSEditor.tpicon_80x80" DefaultValue="https://localhost:8080/Images/Button80x80.png" />
+				<bt:Image id="DSEditor.tpicon_16x16" DefaultValue="https://localhost:8080/assets/icon-16.png" />
+				<bt:Image id="DSEditor.tpicon_32x32" DefaultValue="https://localhost:8080/assets/icon-32.png" />
+				<bt:Image id="DSEditor.tpicon_80x80" DefaultValue="https://localhost:8080/assets/icon-80.png" />
 			</bt:Images>
 			<bt:Urls>
 				<bt:Url id="DSEditor.Taskpane.Url" DefaultValue="https://localhost:8080/index.html" />

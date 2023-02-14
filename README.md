@@ -34,6 +34,12 @@ npm run lint
 1. [Manually sideload the add-in to Office on the web](https://learn.microsoft.com/en-us/office/dev/add-ins/testing/sideload-office-add-ins-for-testing#manually-sideload-an-add-in-to-office-on-the-web)
 1. select `manifest-local.xml`
 
+## Generate production manifest.xml from manifest-local.xml
+
+> npm run make-manifest
+
+Do this any time the local manifest changes.
+
 ## Layout
 
 Layout of folders
