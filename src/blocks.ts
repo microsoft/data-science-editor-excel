@@ -15,7 +15,7 @@ export const blocks = [
         colour,
         args0: [
             {
-                type: "jacdac_field_iframe_data_chooser",
+                type: "ds_field_iframe_data_chooser",
                 name: "table name",
                 dataId: "table",
             },
@@ -40,12 +40,12 @@ export const transforms = {
     excel_import_table: async (b) => {
         const tableName = b.inputs[0].fields["table name"].value;
         if (!tableName) {
-            console.log(`table.load no table selected`);
+            console.debug(`table.load no table selected`);
             return { dataset: [] };
         }
 
         const dataset = await getDataForTable(tableName);
-        console.log(`table.load`, { tableName, dataset });
+        console.debug(`table.load`, { tableName, dataset });
         if (!dataset) return { warning: "table not found", dataset: [] };
         return { dataset };
     },

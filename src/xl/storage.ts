@@ -7,7 +7,7 @@ export async function saveSetting(key: SettingsKey, value: string): Promise<void
         const settings = context.workbook.settings;
         settings.add(SettingsKey[key], value);
 
-        console.log(`settings.save`, { key, value });
+        console.debug(`settings.save`, { key, value });
         await context.sync();
     });
 }
@@ -19,9 +19,9 @@ export async function loadSetting(key: SettingsKey): Promise<string> {
 
         await context.sync();
 
-        console.log("settings.object", { settings });
+        console.debug("settings.object", { settings });
         if (setting.isNullObject) {
-            console.log(`settings.notfound`);
+            console.debug(`settings.notfound`);
             return "";
         }
 
@@ -29,7 +29,7 @@ export async function loadSetting(key: SettingsKey): Promise<string> {
         await context.sync();
 
         const v = typeof setting.value === "string" ? setting.value : "";
-        console.log("settings.value", { settings, v });
+        console.debug("settings.value", { settings, v });
         return v;
     });
 }
