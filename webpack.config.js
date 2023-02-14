@@ -4,8 +4,6 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const devCerts = require("office-addin-dev-certs");
 
-
-
 module.exports = async () => ({
     mode: "development",
     entry: "./src/index.ts",
@@ -14,47 +12,48 @@ module.exports = async () => ({
             {
                 test: /\.tsx?$/,
                 use: "ts-loader",
-                exclude: /node-modules/
-            }
-        ]
+                exclude: /node-modules/,
+            },
+        ],
     },
     resolve: {
-        extensions: [".tsx", ".ts", ".js"]
+        extensions: [".tsx", ".ts", ".js"],
     },
     output: {
         filename: "bundle.js",
-        path: path.resolve(__dirname, "dist")
+        path: path.resolve(__dirname, "dist"),
     },
     plugins: [
         new CleanWebpackPlugin(),
         new HtmlWebpackPlugin({
-          title: "Data Science Editor",
-          template: "index.ejs"
+            title: "Data Science Editor",
+            template: "index.ejs",
         }),
         new CopyWebpackPlugin({
             patterns: [
-                {from: "Images", to:""},
-                {from: "listing/statements/*.md", to:"statements"},
-                {from: "src/instructions/*.html", to:""},
-                {from: "hosted_files/*", to:""},
-            ]
-        })
+                { from: "Images/*", to: "" },
+                { from: "listing/statements/*.md", to: "" },
+                { from: "listing/about.md", to: "" },
+                { from: "src/instructions/*.html", to: "" },
+                { from: "hosted_files/*", to: "" },
+            ],
+        }),
     ],
     devServer: {
         headers: {
-            "Access-Control-Allow-Origin": "*"
+            "Access-Control-Allow-Origin": "*",
         },
         https: await getHttpsOptions(),
-        port: 8080
-    }
+        port: 8080,
+    },
 });
 
 async function getHttpsOptions() {
     const options = await devCerts.getHttpsServerOptions();
-    
+
     return {
         cacert: options.ca,
         key: options.key,
-        cert: options.cert
+        cert: options.cert,
     };
 }

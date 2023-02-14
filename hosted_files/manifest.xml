@@ -11,14 +11,14 @@
 	<DisplayName DefaultValue="Data Science Editor" />
 	<Description DefaultValue="Data Science Editor" />
 	<!-- Icon for your add-in. Used on installation screens and the add-ins dialog. -->
-	<IconUrl DefaultValue="https://green-rock-09efbc210.azurestaticapps.net/Images/Button32x32.png" />
+	<IconUrl DefaultValue="https://microsoft.github.io/data-science-editor-excel/Images/Button32x32.png" />
 	<!--End Basic Settings. -->
 	<!--Begin TaskPane Mode integration. This section is used if there are no VersionOverrides or if the Office client version does not support add-in commands. -->
 	<Hosts>
 		<Host Name="Workbook" />
 	</Hosts>
 	<DefaultSettings>
-		<SourceLocation DefaultValue="https://green-rock-09efbc210.azurestaticapps.net/index.html" />
+		<SourceLocation DefaultValue="https://microsoft.github.io/data-science-editor-excel/index.html" />
 	</DefaultSettings>
 	<!-- End TaskPane Mode integration.  -->
 	<Permissions>ReadWriteDocument</Permissions>
@@ -85,13 +85,13 @@
 		<!-- You can use resources across hosts and form factors. -->
 		<Resources>
 			<bt:Images>
-				<bt:Image id="DSEditor.tpicon_16x16" DefaultValue="https://green-rock-09efbc210.azurestaticapps.net/Images/Button16x16.png" />
-				<bt:Image id="DSEditor.tpicon_32x32" DefaultValue="https://green-rock-09efbc210.azurestaticapps.net/Images/Button32x32.png" />
-				<bt:Image id="DSEditor.tpicon_80x80" DefaultValue="https://green-rock-09efbc210.azurestaticapps.net/Images/Button80x80.png" />
+				<bt:Image id="DSEditor.tpicon_16x16" DefaultValue="https://microsoft.github.io/data-science-editor-excel/Images/Button16x16.png" />
+				<bt:Image id="DSEditor.tpicon_32x32" DefaultValue="https://microsoft.github.io/data-science-editor-excel/Images/Button32x32.png" />
+				<bt:Image id="DSEditor.tpicon_80x80" DefaultValue="https://microsoft.github.io/data-science-editor-excel/Images/Button80x80.png" />
 			</bt:Images>
 			<bt:Urls>
-				<bt:Url id="DSEditor.Taskpane.Url" DefaultValue="https://green-rock-09efbc210.azurestaticapps.net/index.html" />
-				<bt:Url id="DSEditor.GetStarted.LearnMoreUrl" DefaultValue="http://go.microsoft.com/fwlink/?LinkId=276812" />
+				<bt:Url id="DSEditor.Taskpane.Url" DefaultValue="https://microsoft.github.io/data-science-editor-excel/index.html" />
+				<bt:Url id="DSEditor.GetStarted.LearnMoreUrl" DefaultValue="https://microsoft.github.io/data-science-editor-excel/about.md" />
 			</bt:Urls>
 			<!-- ShortStrings max characters==125. -->
 			<bt:ShortStrings>
