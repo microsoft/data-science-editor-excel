@@ -12,10 +12,10 @@
     ],
     "scripts": {
         "build": "npm run clean && npm run style && npm run lint && npm run compile",
-        "style": "./node_modules/.bin/prettier --config ./config/prettier.json  --write \"@(src|test|scripts)/**/*.@(ts|js|md|html|css|json)\"",
-        "style-check": "./node_modules/.bin/prettier --config ./config/prettier.json  --check \"@(src|test)/**/*.@(ts|js|md|html|css|json)\"",
-        "lint": "./node_modules/.bin/eslint --config ./config/eslint.json --no-eslintrc \"@(src|test|scripts)/**/*.@(ts|js)\"",
-        "lint-fix": "./node_modules/.bin/eslint --config ./config/eslint.json --no-eslintrc --fix \"@(src|test|scripts)/**/*.@(ts|js)\"",
+        "style": "prettier --config ./config/prettier.json  --write \"@(src|test|scripts)/**/*.@(ts|js|md|html|css|json)\"",
+        "style-check": "prettier --config ./config/prettier.json  --check \"@(src|test)/**/*.@(ts|js|md|html|css|json)\"",
+        "lint": "eslint --config ./config/eslint.json --no-eslintrc \"@(src|test|scripts)/**/*.@(ts|js)\"",
+        "lint-fix": "eslint --config ./config/eslint.json --no-eslintrc --fix \"@(src|test|scripts)/**/*.@(ts|js)\"",
         "clean": "node ./scripts/clean.js dist && node ./scripts/clean.js temp",
         "compile": "webpack",
         "dev-server": "webpack-dev-server --mode development"
