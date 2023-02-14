@@ -2,6 +2,8 @@
 
 Contains prototype of Data Science Editor Office.js add-in.
 
+![A gif showcasing the app in action.](https://microsoft.github.io/data-science-editor-excel/hosted_files/editorHowTo.gif)
+
 ## Getting Started
 
 1. Download the latest LTS version of [node.js](https://nodejs.org/en/download/).
