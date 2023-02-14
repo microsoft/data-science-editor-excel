@@ -28,7 +28,7 @@ import { getAllTables } from "./xl/tables";
         });
     };
     const handleBlocks = async (data) => {
-        console.log(`hostdsl: sending blocks`);
+        console.debug(`hostdsl: sending blocks`);
         post({ ...data, blocks, category });
     };
     const handleTransform = async (data) => {
@@ -53,7 +53,7 @@ import { getAllTables } from "./xl/tables";
         if (!pendingLoad || !currentDslId) return;
 
         const { editor, xml, json } = pendingLoad;
-        console.log(`settings.sending`, { editor, xml, json });
+        console.debug(`settings.sending`, { editor, xml, json });
         pendingLoad = undefined;
         await postTables();
         post({
@@ -69,13 +69,13 @@ import { getAllTables } from "./xl/tables";
         loadSetting(SettingsKey.EditorSaveData).then((setting) => {
             loaded = true;
             if (!setting) {
-                console.log(`settings.none`);
+                console.debug(`settings.none`);
                 return;
             }
 
             const parsed = JSON.parse(setting);
             pendingLoad = parsed;
-            console.log(`settings.found`, { toLoad: pendingLoad, setting });
+            console.debug(`settings.found`, { toLoad: pendingLoad, setting });
             tryloading();
         });
 
@@ -85,11 +85,11 @@ import { getAllTables } from "./xl/tables";
                 const { data } = msg;
                 if (data.type !== "dsl") return;
                 const { dslid, action } = data;
-                console.log(action, data);
+                console.debug(action, data);
                 switch (action) {
                     case "mount": {
                         currentDslId = dslid;
-                        console.log(`dslid: ${dslid}`);
+                        console.debug(`dslid: ${dslid}`);
                         tryloading();
                         break;
                     }
@@ -113,7 +113,7 @@ import { getAllTables } from "./xl/tables";
                     case "save": {
                         // don't save until we've reloaded our content from excel
                         if (!loaded) {
-                            console.log(`save.ignore: not loaded yet`);
+                            console.debug(`save.ignore: not loaded yet`);
                             break;
                         }
 
@@ -136,10 +136,10 @@ import { getAllTables } from "./xl/tables";
         );
 
         Excel.run(async (context) => {
-            console.log(`dsl: initializing`);
+            console.debug(`dsl: initializing`);
             context.workbook.tables.onChanged.add(onTableChanged);
             await context.sync();
-            console.log(`dsl: initialized`);
+            console.debug(`dsl: initialized`);
         });
     });
 
