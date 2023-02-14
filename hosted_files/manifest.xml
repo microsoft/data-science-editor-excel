@@ -91,7 +91,7 @@
 			</bt:Images>
 			<bt:Urls>
 				<bt:Url id="DSEditor.Taskpane.Url" DefaultValue="https://microsoft.github.io/data-science-editor-excel/index.html" />
-				<bt:Url id="DSEditor.GetStarted.LearnMoreUrl" DefaultValue="https://microsoft.github.io/data-science-editor-excel/about.md" />
+				<bt:Url id="DSEditor.GetStarted.LearnMoreUrl" DefaultValue="http://go.microsoft.com/fwlink/?LinkId=276812" />
 			</bt:Urls>
 			<!-- ShortStrings max characters==125. -->
 			<bt:ShortStrings>
