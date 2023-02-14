@@ -37,7 +37,6 @@ module.exports = async () => ({
         new CopyWebpackPlugin({
             patterns: [
                 { from: "Images/*", to: "" },
-                { from: "listing/about.md", to: "" },
                 { from: "hosted_files/*", to: "" },
             ],
         }),
