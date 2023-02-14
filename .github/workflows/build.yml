@@ -51,8 +51,8 @@ jobs:
     - name: clean
       run: npm run clean
 
-    # - name: style
-    #   run: npm run style-check
+    - name: style
+      run: npm run style-check
 
     - name: compile
       run: npm run compile
