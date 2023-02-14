@@ -51,10 +51,10 @@ This add-in is a host to an iframe that holds the data science editor. This Add-
 
 This add-in is complete static and hosted on a github pages site.
 
-## Hosted Site
+## Testing the hosted data science editor locally
 
-A pipeline is configured to build and deploy to an Azure Static Web App site on each merge into `main`.  The pipeline file is `pipelines\build_and_deploy_to_static_app.yaml`.
-
+- clone https://github.com/microsoft/data-science-editor and follow instructions to launch dev server
+- update `localhost` to true in webpack.config.js and rebuild
 
 ## TODOs
 

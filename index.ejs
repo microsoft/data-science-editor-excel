@@ -1,20 +1,17 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8" />
-        <meta content="ie=edge" http-equiv="x-ua-compatible" />
-        <title><%= htmlWebpackPlugin.options.title %></title>
-    </head>
 
-    <body>
-        <script
-            type="text/javascript"
-            src="https://appsforoffice.microsoft.com/lib/beta/hosted/excel.js"
-        ></script>
-        <iframe
-            id="dseditor"
-            src="https://microsoft.github.io/data-science-editor/?embed=1&dataset=0&storage=0"
-            style="
+<head>
+    <meta charset="utf-8" />
+    <meta content="ie=edge" http-equiv="x-ua-compatible" />
+    <title>
+        <%= htmlWebpackPlugin.options.title %>
+    </title>
+</head>
+
+<body>
+    <script type="text/javascript" src="https://appsforoffice.microsoft.com/lib/beta/hosted/excel.js"></script>
+    <iframe id="dseditor" src="<%= htmlWebpackPlugin.options.domain %>?embed=1&dataset=0&storage=0" style="
                 margin: 0;
                 border: none;
                 width: 100%;
@@ -22,8 +19,8 @@
                 position: absolute;
                 left: 0;
                 top: 0;
-            "
-        >
-        </iframe>
-    </body>
+            ">
+    </iframe>
+</body>
+
 </html>
