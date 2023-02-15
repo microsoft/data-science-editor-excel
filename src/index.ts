@@ -3,14 +3,23 @@ import { blocks, category, transforms, setCurrentWorkspace } from "./blocks";
 import { getAllTables } from "./xl/tables";
 (() => {
     const dseditor = document.getElementById("dseditor") as HTMLIFrameElement;
-    const post = (payload: { type: "dsl"; action: string; dslid: string } & any) => {
+    const post = (payload: {
+        // TODO: replace these types with the actual types
+        type?: "dsl";
+        action?: string;
+        dslid?: string;
+        options?: { table: [string, string][] };
+        editor?: string;
+        xml?: string;
+        json?: object;
+    }) => {
         console.debug(`data blocks send`, payload);
         dseditor.contentWindow.postMessage(payload, "*");
     };
     const postTables = async () => {
         const table: [string, string][] = [];
         await Excel.run(async (context) => {
-            const tables = await getAllTables();
+            const tables = await getAllTables(context);
             for (const t of tables) {
                 if (t.name.charAt(0) !== "_") {
                     table.push([t.name, t.name]);
@@ -81,7 +90,18 @@ import { getAllTables } from "./xl/tables";
 
         window.addEventListener(
             "message",
-            (msg: MessageEvent) => {
+            (
+                msg: MessageEvent<{
+                    // TODO: replace these types with the actual types
+                    type: string;
+                    dslid: string;
+                    action: string;
+                    workspace: string;
+                    editor: string;
+                    xml: string;
+                    json: string;
+                }>
+            ) => {
                 const { data } = msg;
                 if (data.type !== "dsl") return;
                 const { dslid, action } = data;
@@ -106,7 +126,7 @@ import { getAllTables } from "./xl/tables";
                         break;
                     }
                     case "workspace": {
-                        const { workspace, ...rest } = data;
+                        const { workspace } = data;
                         setCurrentWorkspace(workspace);
                         break;
                     }

@@ -2,15 +2,15 @@ import { getDataForTable } from "./xl/data";
 
 const colour = "#107C41";
 
-export type Block = any;
-export type DataTable = any;
+// export type Block = any;
+// export type DataTable = any;
 
-export let currentWorkspace;
+export let currentWorkspace: unknown;
 
 export const blocks = [
     {
         kind: "block",
-        type: "excel_import_table",
+        type: "excelImportTable",
         message0: "table %1",
         colour,
         args0: [
@@ -37,7 +37,7 @@ export const category = [
 ];
 
 export const transforms = {
-    excel_import_table: async (b) => {
+    excelImportTable: async (b) => {
         const tableName = b.inputs[0].fields["table name"].value;
         if (!tableName) {
             console.debug(`table.load no table selected`);

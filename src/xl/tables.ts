@@ -1,5 +1,5 @@
-export const DATA_SCIENCE_EXPORT_SHEET = "Data Science Editor Export";
-export const DATA_SCIENCE_EXPORT_TABLE = "DataScienceEditorTable";
+export const dataScienceExportSheet = "Data Science Editor Export";
+export const dataScienceExportTable = "DataScienceEditorTable";
 
 export async function createTableForAddress(name: string, address: string): Promise<void> {
     await Excel.run(async (context) => {
@@ -79,13 +79,13 @@ async function fillTableFromDataset(
     const table = sheet.tables.add(tableRange, true /*hasHeaders*/);
     table.load("name");
     await context.sync();
-    table.name = DATA_SCIENCE_EXPORT_TABLE;
+    table.name = dataScienceExportTable;
 }
 
 export async function insertTableFromDataset(dataset) {
     return await Excel.run(async (context) => {
         // Insert a new sheet if it doesn't exist
-        let sheet = context.workbook.worksheets.getItemOrNullObject(DATA_SCIENCE_EXPORT_SHEET);
+        let sheet = context.workbook.worksheets.getItemOrNullObject(dataScienceExportSheet);
         await context.sync();
 
         sheet.load("visibility");
@@ -97,7 +97,7 @@ export async function insertTableFromDataset(dataset) {
             await context.sync();
         }
 
-        sheet = context.workbook.worksheets.add(DATA_SCIENCE_EXPORT_SHEET);
+        sheet = context.workbook.worksheets.add(dataScienceExportSheet);
         await context.sync();
 
         sheet.load("visibility");
@@ -109,11 +109,9 @@ export async function insertTableFromDataset(dataset) {
     });
 }
 
-export async function getAllTables(): Promise<Excel.Table[]> {
-    return await Excel.run(async (context) => {
-        const tables = context.workbook.tables;
-        tables.load();
-        await context.sync();
-        return tables.items;
-    });
+export async function getAllTables(context: Excel.RequestContext): Promise<Excel.Table[]> {
+    const tables = context.workbook.tables;
+    tables.load();
+    await context.sync();
+    return tables.items;
 }

@@ -1,12 +1,13 @@
 setlocal enabledelayedexpansion
 @echo off
 
-:: icon test
+:: icon text
 set name=icon
 
 set THISDIR=%~dp0
 set THISDIR=%THISDIR:~,-1%
 
+:: Path to inkscape install
 set inkscape="%tools%\Programs\inkscape\inkscape.exe"
 
 for %%s in (16 32 80 128 300) do (

@@ -57,12 +57,21 @@ The Manifest is set to require a specific Excel version to avoid having to suppo
 
 Layout of folders
 
+- __assets__
+    - image assets
 - __src__
     - source code for the add-in
 - __listing__
     - descriptions for the add-in store listing
     - __statements__
     - statements that must be linked to the add-in store listing
+- __hosted_files__
+    - additional hosted files
+- __scripts__
+    - development scripts
+
+- __dist__
+    - the build site, this is the exact layout hosted
 
 ## Architecture
 
