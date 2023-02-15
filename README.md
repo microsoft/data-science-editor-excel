@@ -1,14 +1,15 @@
 # Data Science Editor
 
-Prototype integration of the [Data Science Editor](https://microsoft.github.io/data-scienc-editor/) in Office for the Web.
+Prototype integration of the [Data Science Editor](https://microsoft.github.io/data-science-editor/excel/) in Office for the Web.
 
 ![A gif showcasing the app in action.](https://microsoft.github.io/data-science-editor-excel/hosted_files/editorHowTo.gif)
 
 ## Developer Zone
 
 These instructions will show you how to build and debug the Office App locally.
+To file issues, use https://github.com/microsoft/data-science-editor/issues
 
-### Getting Started
+## Getting Started
 
 These instructions have been tested on Windows only.
 
