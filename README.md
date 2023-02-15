@@ -64,6 +64,8 @@ Layout of folders
     - additional hosted files
 - **scripts**
     - development scripts
+- **config**
+    - tooling configuration files
 
 - **dist**
     - the build site, this is the exact layout hosted

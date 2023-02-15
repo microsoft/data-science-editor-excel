@@ -39,7 +39,6 @@ const config = {
         }),
         new CopyWebpackPlugin({
             patterns: [
-                { from: "Images/*", to: "" },
                 { from: "hosted_files/*", to: "" },
                 { from: "assets/*.png", to: "" },
             ],
