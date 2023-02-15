@@ -76,7 +76,7 @@ Make all manifest changes to `manifest-local.xml`.
 
 When the local manifest changes run:
 
-> npm run update-manifest
+> npm run manifest
 
 The command:
 

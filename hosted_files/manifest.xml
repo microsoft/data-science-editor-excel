@@ -7,7 +7,7 @@
   <DisplayName DefaultValue="Data Science Editor" />
   <Description DefaultValue="Data Science Editor" />
   <IconUrl DefaultValue="https://microsoft.github.io/data-science-editor-excel/assets/icon-32.png" />
-  <HighResolutionIconUrl DefaultValue="https://microsoft.github.io/data-science-editor-excel/assets/icon-80.png"/>
+  <HighResolutionIconUrl DefaultValue="https://microsoft.github.io/data-science-editor-excel/assets/icon-64.png"/>
   <!-- TODO: fix support url-->
   <SupportUrl DefaultValue="https://microsoft.github.io/data-science-editor/about/"/>
   <AppDomains>
@@ -51,6 +51,7 @@
                 <Icon>
                   <bt:Image size="16" resid="Icon.16x16" />
                   <bt:Image size="32" resid="Icon.32x32" />
+                  <bt:Image size="64" resid="Icon.64x64" />
                   <bt:Image size="80" resid="Icon.80x80" />
                 </Icon>
                 <!-- Control. It can be of type "Button" or "Menu". -->
@@ -65,6 +66,7 @@
                   <Icon>
                     <bt:Image size="16" resid="Icon.16x16" />
                     <bt:Image size="32" resid="Icon.32x32" />
+                    <bt:Image size="64" resid="Icon.64x64" />
                     <bt:Image size="80" resid="Icon.80x80" />
                   </Icon>
                   <!-- This is what happens when the command is triggered (E.g. click on the Ribbon). Supported actions are ExecuteFunction or ShowTaskpane. -->
@@ -84,6 +86,7 @@
       <bt:Images>
         <bt:Image id="Icon.16x16" DefaultValue="https://microsoft.github.io/data-science-editor-excel/assets/icon-16.png" />
         <bt:Image id="Icon.32x32" DefaultValue="https://microsoft.github.io/data-science-editor-excel/assets/icon-32.png" />
+        <bt:Image id="Icon.64x64" DefaultValue="https://microsoft.github.io/data-science-editor-excel/assets/icon-64.png" />
         <bt:Image id="Icon.80x80" DefaultValue="https://microsoft.github.io/data-science-editor-excel/assets/icon-80.png" />
       </bt:Images>
       <bt:Urls>
