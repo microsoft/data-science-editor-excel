@@ -39,7 +39,7 @@ const config = {
         }),
         new CopyWebpackPlugin({
             patterns: [
-                { from: "listing/about.md", to: "" },
+                { from: "Images/*", to: "" },
                 { from: "hosted_files/*", to: "" },
                 { from: "assets/*.png", to: "" },
             ],

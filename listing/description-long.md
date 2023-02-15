@@ -1,3 +1,3 @@
 Data Science Editor
 
-Drag and drop editor to analyze and chart data.
+Drag and drop block editor to explore data.
