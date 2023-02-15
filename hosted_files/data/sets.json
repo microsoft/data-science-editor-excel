@@ -1,0 +1,12 @@
+{
+    "sets": [
+        {
+            "name": "cereals",
+            "path": "cereals.tsv"
+        },
+        {
+            "name": "penguins",
+            "path": "penguins.tsv"
+        }
+    ]
+}

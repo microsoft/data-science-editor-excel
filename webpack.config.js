@@ -40,6 +40,13 @@ const config = {
         new CopyWebpackPlugin({
             patterns: [
                 { from: "hosted_files/*", to: "" },
+                {
+                    from: "hosted_files/data/*",
+                    to: (pathData) => {
+                        const base = path.basename(pathData.absoluteFilename);
+                        return path.join("data", base);
+                    },
+                },
                 { from: "assets/*.png", to: "" },
             ],
         }),
