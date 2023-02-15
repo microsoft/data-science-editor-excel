@@ -58,8 +58,6 @@ Layout of folders
     - source code for the add-in
 - **listing**
     - descriptions for the add-in store listing
-    - **statements**
-    - statements that must be linked to the add-in store listing
 - **hosted_files**
     - additional hosted files
 - **scripts**
