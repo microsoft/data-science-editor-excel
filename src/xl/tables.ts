@@ -1,5 +1,7 @@
-export const dataScienceExportSheet = "Data Science Editor Export";
-export const dataScienceExportTable = "DataScienceEditorTable";
+// eslint-disable-next-line @typescript-eslint/naming-convention
+export const DATA_SCIENCE_EXPORT_SHEET = "Data Science Editor Export";
+// eslint-disable-next-line @typescript-eslint/naming-convention
+export const DATA_SCIENCE_EXPORT_TABLE = "DataScienceEditorTable";
 
 export async function createTableForAddress(name: string, address: string): Promise<void> {
     await Excel.run(async (context) => {
@@ -79,13 +81,13 @@ async function fillTableFromDataset(
     const table = sheet.tables.add(tableRange, true /*hasHeaders*/);
     table.load("name");
     await context.sync();
-    table.name = dataScienceExportTable;
+    table.name = DATA_SCIENCE_EXPORT_TABLE;
 }
 
 export async function insertTableFromDataset(dataset) {
     return await Excel.run(async (context) => {
         // Insert a new sheet if it doesn't exist
-        let sheet = context.workbook.worksheets.getItemOrNullObject(dataScienceExportSheet);
+        let sheet = context.workbook.worksheets.getItemOrNullObject(DATA_SCIENCE_EXPORT_SHEET);
         await context.sync();
 
         sheet.load("visibility");
@@ -97,7 +99,7 @@ export async function insertTableFromDataset(dataset) {
             await context.sync();
         }
 
-        sheet = context.workbook.worksheets.add(dataScienceExportSheet);
+        sheet = context.workbook.worksheets.add(DATA_SCIENCE_EXPORT_SHEET);
         await context.sync();
 
         sheet.load("visibility");

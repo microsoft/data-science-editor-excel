@@ -10,7 +10,7 @@ export let currentWorkspace: unknown;
 export const blocks = [
     {
         kind: "block",
-        type: "excelImportTable",
+        type: "excel_import_table",
         message0: "table %1",
         colour,
         args0: [
@@ -37,7 +37,9 @@ export const category = [
 ];
 
 export const transforms = {
-    excelImportTable: async (b) => {
+    // don't rename these identifiers, they are used in the serialized blocky and will break existing files
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+    excel_import_table: async (b) => {
         const tableName = b.inputs[0].fields["table name"].value;
         if (!tableName) {
             console.debug(`table.load no table selected`);
