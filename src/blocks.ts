@@ -2,10 +2,10 @@ import { getDataForTable } from "./xl/data";
 
 const colour = "#107C41";
 
-export type Block = any;
-export type DataTable = any;
+// export type Block = any;
+// export type DataTable = any;
 
-export let currentWorkspace;
+export let currentWorkspace: unknown;
 
 export const blocks = [
     {
@@ -37,6 +37,8 @@ export const category = [
 ];
 
 export const transforms = {
+    // don't rename these identifiers, they are used in the serialized blocky and will break existing files
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     excel_import_table: async (b) => {
         const tableName = b.inputs[0].fields["table name"].value;
         if (!tableName) {

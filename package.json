@@ -17,8 +17,13 @@
         "lint": "eslint --config ./config/eslint.json --no-eslintrc \"@(src|test|scripts)/**/*.@(ts|js)\"",
         "lint-fix": "eslint --config ./config/eslint.json --no-eslintrc --fix \"@(src|test|scripts)/**/*.@(ts|js)\"",
         "clean": "node ./scripts/clean.js dist && node ./scripts/clean.js temp",
+        "update-manifest": "npm run check-manifest-local && node ./scripts/make-manifest.js && npm run check-manifest",
+        "make-manifest": "node ./scripts/make-manifest.js",
+        "check-manifest": "npx office-addin-manifest validate hosted_files/manifest.xml",
+        "check-manifest-local": "npx office-addin-manifest validate manifest-local.xml",
         "compile": "webpack",
-        "dev-server": "webpack-dev-server --mode development"
+        "dev-server": "webpack-dev-server --mode development",
+        "server": "npm run dev-server"
     },
     "repository": {
         "type": "git",
@@ -29,16 +34,16 @@
     "bugs": {
         "url": "https://github.com/microsoft/data-science-editor-excel/issues"
     },
-    "dependencies": {},
     "devDependencies": {
+        "@types/node": "^18.13.0",
         "@types/office-js": "^1.0.315",
-        "clean-webpack-plugin": "^4.0.0",
-        "html-webpack-plugin": "^4.5.0",
-        "copy-webpack-plugin": "^11.0.0",
-        "office-addin-dev-certs": "^1.11.1",
         "@typescript-eslint/eslint-plugin": "^5.41.0",
         "@typescript-eslint/parser": "^5.41.0",
+        "clean-webpack-plugin": "^4.0.0",
+        "copy-webpack-plugin": "^11.0.0",
         "eslint": "^8.26.0",
+        "html-webpack-plugin": "^4.5.0",
+        "office-addin-dev-certs": "^1.11.1",
         "prettier": "^2.8.4",
         "ts-loader": "^9.4.2",
         "typescript": "^4.9.5",

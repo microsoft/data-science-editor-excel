@@ -1,110 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
 <OfficeApp xmlns="http://schemas.microsoft.com/office/appforoffice/1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bt="http://schemas.microsoft.com/office/officeappbasictypes/1.0" xmlns:ov="http://schemas.microsoft.com/office/taskpaneappversionoverrides" xsi:type="TaskPaneApp">
-	<!-- Begin Basic Settings: Add-in metadata, used for all versions of Office unless override provided. -->
-	<!-- IMPORTANT! Id must be unique for your add-in, if you reuse this manifest ensure that you change this id to a new GUID. -->
-	<Id>93BA1D50-9260-48E8-B42F-979634F28AD7</Id>
-	<!--Version. Updates from the store only get triggered if there is a version change. -->
-	<Version>1.0.0.0</Version>
-	<ProviderName>Microsoft</ProviderName>
-	<DefaultLocale>en-US</DefaultLocale>
-	<!-- The display name of your add-in. Used on the store and various places of the Office UI such as the add-ins dialog. -->
-	<DisplayName DefaultValue="Data Science Editor" />
-	<Description DefaultValue="Data Science Editor" />
-	<!-- Icon for your add-in. Used on installation screens and the add-ins dialog. -->
-	<IconUrl DefaultValue="https://localhost:8080/Images/Button32x32.png" />
-	<!--End Basic Settings. -->
-	<!--Begin TaskPane Mode integration. This section is used if there are no VersionOverrides or if the Office client version does not support add-in commands. -->
-	<Hosts>
-		<Host Name="Workbook" />
-	</Hosts>
-	<DefaultSettings>
-		<SourceLocation DefaultValue="https://localhost:8080/index.html" />
-	</DefaultSettings>
-	<!-- End TaskPane Mode integration.  -->
-	<Permissions>ReadWriteDocument</Permissions>
-	<!-- Begin Add-in Commands Mode integration. -->
-	<VersionOverrides xmlns="http://schemas.microsoft.com/office/taskpaneappversionoverrides" xsi:type="VersionOverridesV1_0">
-		<!-- The Hosts node is required. -->
-		<Hosts>
-			<!-- Each host can have a different set of commands. -->
-			<!-- Excel host is Workbook, Word host is Document, and PowerPoint host is Presentation. -->
-			<!-- Make sure the hosts you override match the hosts declared in the top section of the manifest. -->
-			<Host xsi:type="Workbook">
-				<!-- Form factor. Currently only DesktopFormFactor is supported. -->
-				<DesktopFormFactor>
-					<!--"This code enables a customizable message to be displayed when the add-in is loaded successfully upon individual install."-->
-					<GetStarted>
-						<!-- Title of the Getting Started callout. resid points to a ShortString resource -->
-						<Title resid="DSEditor.GetStarted.Title" />
-						<!-- Description of the Getting Started callout. resid points to a LongString resource -->
-						<Description resid="DSEditor.GetStarted.Description" />
-						<LearnMoreUrl resid="DSEditor.GetStarted.LearnMoreUrl" />
-					</GetStarted>
-					<!-- PrimaryCommandSurface is the main Office Ribbon. -->
-					<ExtensionPoint xsi:type="PrimaryCommandSurface">
-						<!-- Use OfficeTab to extend an existing Tab. Use CustomTab to create a new tab. -->
-						<OfficeTab id="TabHome">
-							<!-- Ensure you provide a unique id for the group. Recommendation for any IDs is to namespace using your company name. -->
-							<Group id="DSEditor.Group1">
-								<!-- Label for your group. resid must point to a ShortString resource. -->
-								<Label resid="DSEditor.Group1Label" />
-								<!-- Icons. Required sizes 16,32,80, optional 20, 24, 40, 48, 64. Strongly recommended to provide all sizes for great UX. -->
-								<!-- Use PNG icons. All URLs on the resources section must use HTTPS. -->
-								<Icon>
-									<bt:Image size="16" resid="DSEditor.tpicon_16x16" />
-									<bt:Image size="32" resid="DSEditor.tpicon_32x32" />
-									<bt:Image size="80" resid="DSEditor.tpicon_80x80" />
-								</Icon>
-								<!-- Control. It can be of type "Button" or "Menu". -->
-								<Control xsi:type="Button" id="DSEditor.TaskpaneButton">
-									<Label resid="DSEditor.TaskpaneButton.Label" />
-									<Supertip>
-										<!-- ToolTip title. resid must point to a ShortString resource. -->
-										<Title resid="DSEditor.TaskpaneButton.Label" />
-										<!-- ToolTip description. resid must point to a LongString resource. -->
-										<Description resid="DSEditor.TaskpaneButton.Tooltip" />
-									</Supertip>
-									<Icon>
-										<bt:Image size="16" resid="DSEditor.tpicon_16x16" />
-										<bt:Image size="32" resid="DSEditor.tpicon_32x32" />
-										<bt:Image size="80" resid="DSEditor.tpicon_80x80" />
-									</Icon>
-									<!-- This is what happens when the command is triggered (E.g. click on the Ribbon). Supported actions are ExecuteFunction or ShowTaskpane. -->
-									<Action xsi:type="ShowTaskpane">
-										<TaskpaneId>DSEditorTaskpane</TaskpaneId>
-										<!-- Provide a url resource id for the location that will be displayed on the task pane. -->
-										<SourceLocation resid="DSEditor.Taskpane.Url" />
-									</Action>
-								</Control>
-							</Group>
-						</OfficeTab>
-					</ExtensionPoint>
-				</DesktopFormFactor>
-			</Host>
-		</Hosts>
-		<!-- You can use resources across hosts and form factors. -->
-		<Resources>
-			<bt:Images>
-				<bt:Image id="DSEditor.tpicon_16x16" DefaultValue="https://localhost:8080/Images/Button16x16.png" />
-				<bt:Image id="DSEditor.tpicon_32x32" DefaultValue="https://localhost:8080/Images/Button32x32.png" />
-				<bt:Image id="DSEditor.tpicon_80x80" DefaultValue="https://localhost:8080/Images/Button80x80.png" />
-			</bt:Images>
-			<bt:Urls>
-				<bt:Url id="DSEditor.Taskpane.Url" DefaultValue="https://localhost:8080/index.html" />
-				<bt:Url id="DSEditor.GetStarted.LearnMoreUrl" DefaultValue="http://go.microsoft.com/fwlink/?LinkId=276812" />
-			</bt:Urls>
-			<!-- ShortStrings max characters==125. -->
-			<bt:ShortStrings>
-				<bt:String id="DSEditor.TaskpaneButton.Label" DefaultValue="Data Science Editor" />
-				<bt:String id="DSEditor.Group1Label" DefaultValue="Data Science Editor" />
-				<bt:String id="DSEditor.GetStarted.Title" DefaultValue="Get started with Data Science Editor!" />
-			</bt:ShortStrings>
-			<!-- LongStrings max characters==250. -->
-			<bt:LongStrings>
-				<bt:String id="DSEditor.TaskpaneButton.Tooltip" DefaultValue="Click to launch Data Science Editor" />
-				<bt:String id="DSEditor.GetStarted.Description" DefaultValue="An editor to teach data science to students." />
-			</bt:LongStrings>
-		</Resources>
-	</VersionOverrides>
-	<!-- End Add-in Commands Mode integration. -->
+  <Id>93BA1D50-9260-48E8-B42F-979634F28AD7</Id>
+  <Version>1.0.0.0</Version>
+  <ProviderName>Microsoft</ProviderName>
+  <DefaultLocale>en-US</DefaultLocale>
+  <DisplayName DefaultValue="(local) Data Science Editor" />
+  <Description DefaultValue="(local) Data Science Editor" />
+  <IconUrl DefaultValue="https://localhost:8080/assets/icon-32.png" />
+  <HighResolutionIconUrl DefaultValue="https://localhost:8080/assets/icon-80.png"/>
+  <!-- TODO: fix support url-->
+  <SupportUrl DefaultValue="https://microsoft.github.io/data-science-editor/about/"/>
+  <AppDomains>
+    <AppDomain>https://microsoft.github.io</AppDomain>
+  </AppDomains>
+  <Hosts>
+    <Host Name="Workbook" />
+  </Hosts>
+  <!-- Eliminate Office 2013 as an available platform by requiring this minimum requirement set -->
+  <Requirements>
+     <Sets DefaultMinVersion="1.1">
+        <Set Name="ExcelApi" MinVersion="1.16"/>
+      </Sets>
+  </Requirements>
+  <DefaultSettings>
+    <SourceLocation DefaultValue="https://localhost:8080/index.html" />
+  </DefaultSettings>
+  <Permissions>ReadWriteDocument</Permissions>
+  <VersionOverrides xmlns="http://schemas.microsoft.com/office/taskpaneappversionoverrides" xsi:type="VersionOverridesV1_0">
+
+    <Hosts>
+      <Host xsi:type="Workbook">
+
+        <DesktopFormFactor>
+          <GetStarted>
+            <Title resid="GetStarted.Title" />
+            <!-- Description of the Getting Started callout. resid points to a LongString resource -->
+            <Description resid="GetStarted.Description" />
+            <LearnMoreUrl resid="GetStarted.LearnMoreUrl" />
+          </GetStarted>
+          <!-- PrimaryCommandSurface is the main Office Ribbon. -->
+          <ExtensionPoint xsi:type="PrimaryCommandSurface">
+            <!-- Use OfficeTab to extend an existing Tab. Use CustomTab to create a new tab. -->
+            <OfficeTab id="TabHome">
+              <!-- Ensure you provide a unique id for the group. -->
+              <Group id="CommandsGroup">
+                <!-- Label for your group. resid must point to a ShortString resource. -->
+                <Label resid="CommandsGroup.Label" />
+                <!-- Icons. Required sizes 16,32,80, optional 20, 24, 40, 48, 64. Strongly recommended to provide all sizes for great UX. -->
+                <!-- Use PNG icons. All URLs on the resources section must use HTTPS. -->
+                <Icon>
+                  <bt:Image size="16" resid="Icon.16x16" />
+                  <bt:Image size="32" resid="Icon.32x32" />
+                  <bt:Image size="80" resid="Icon.80x80" />
+                </Icon>
+                <!-- Control. It can be of type "Button" or "Menu". -->
+                <Control xsi:type="Button" id="TaskpaneButton">
+                  <Label resid="TaskpaneButton.Label" />
+                  <Supertip>
+                    <!-- ToolTip title. resid must point to a ShortString resource. -->
+                    <Title resid="TaskpaneButton.Label" />
+                    <!-- ToolTip description. resid must point to a LongString resource. -->
+                    <Description resid="TaskpaneButton.Tooltip" />
+                  </Supertip>
+                  <Icon>
+                    <bt:Image size="16" resid="Icon.16x16" />
+                    <bt:Image size="32" resid="Icon.32x32" />
+                    <bt:Image size="80" resid="Icon.80x80" />
+                  </Icon>
+                  <!-- This is what happens when the command is triggered (E.g. click on the Ribbon). Supported actions are ExecuteFunction or ShowTaskpane. -->
+                  <Action xsi:type="ShowTaskpane">
+                    <TaskpaneId>DataScienceEditorTaskpane</TaskpaneId>
+                    <SourceLocation resid="Taskpane.Url" />
+                  </Action>
+                </Control>
+              </Group>
+            </OfficeTab>
+          </ExtensionPoint>
+        </DesktopFormFactor>
+      </Host>
+    </Hosts>
+    <!-- Resources -->
+    <Resources>
+      <bt:Images>
+        <bt:Image id="Icon.16x16" DefaultValue="https://localhost:8080/assets/icon-16.png" />
+        <bt:Image id="Icon.32x32" DefaultValue="https://localhost:8080/assets/icon-32.png" />
+        <bt:Image id="Icon.80x80" DefaultValue="https://localhost:8080/assets/icon-80.png" />
+      </bt:Images>
+      <bt:Urls>
+        <bt:Url id="Taskpane.Url" DefaultValue="https://localhost:8080/index.html" />
+        <bt:Url id="GetStarted.LearnMoreUrl" DefaultValue="https://microsoft.github.io/data-science-editor/about/" />
+      </bt:Urls>
+      <!-- ShortStrings max characters = 125 -->
+      <bt:ShortStrings>
+        <bt:String id="TaskpaneButton.Label" DefaultValue="(local) Data Science Editor" />
+        <bt:String id="CommandsGroup.Label" DefaultValue="(local) Data Science Editor" />
+        <bt:String id="GetStarted.Title" DefaultValue="Get started with (local) Data Science Editor!" />
+      </bt:ShortStrings>
+      <!-- LongStrings max characters = 250 -->
+      <bt:LongStrings>
+        <bt:String id="TaskpaneButton.Tooltip" DefaultValue="Click to launch (local) Data Science Editor" />
+        <bt:String id="GetStarted.Description" DefaultValue="An editor to teach data science to students." />
+      </bt:LongStrings>
+    </Resources>
+  </VersionOverrides>
 </OfficeApp>

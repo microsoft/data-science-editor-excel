@@ -15,48 +15,32 @@ These instructions have been tested on Windows only.
 1. Download the latest LTS version of [node.js](https://nodejs.org/en/download/).
 1. Install all dependencies.
 
-```bash
-npm run install
-```
+> npm run install
 
 ### Build
 
 The following script will build and place assets in the dist directory:
 
-```bash
-npm run build
-```
+> npm run build
 
 ### Lint
 
 Runs prettier over all typescript files
 
-```back
-npm run lint
-```
+> npm run lint
 
 ### Manual Test
 
 1. Run the following script to start the dev server:
-    - `npm run dev-server`
+    - `npm run server`
 1. [Manually sideload the add-in to Office on the web](https://learn.microsoft.com/en-us/office/dev/add-ins/testing/sideload-office-add-ins-for-testing#manually-sideload-an-add-in-to-office-on-the-web)
 1. select `manifest-local.xml`
-
-### Layout
-
-Layout of folders
-
--   **src**
-    -   source code for the add-in
--   **listing**
-    -   descriptions for the add-in store listing
-    -   **statements**
-    -   statements that must be linked to the add-in store listing
 
 ## Testing the hosted data science editor locally
 
 -   clone https://github.com/microsoft/data-science-editor and follow instructions to launch dev server
 -   update `localhost` to true in webpack.config.js and rebuild
+
 
 ## Architecture
 
@@ -64,9 +48,44 @@ This add-in is a host to an iframe that holds the data science editor. This Add-
 
 This add-in is complete static and hosted on a github pages site.
 
-## TODOs
+### Layout
 
--   [ ] detect changes in worksheet and notify blocks to recompute
--   [ ] somehow 1 block workspace per worksheet (low pri)
--   [ ] fix the editor CSS so that it uses the whole screen
--   [ ] match the color scheme looks to Excel?
+Layout of folders
+
+- **assets**
+    - image assets
+- **src**
+    - source code for the add-in
+- **listing**
+    - descriptions for the add-in store listing
+- **hosted_files**
+    - additional hosted files
+- **scripts**
+    - development scripts
+- **config**
+    - tooling configuration files
+
+- **dist**
+    - the build site, this is the exact layout hosted
+
+## Add-In Manifest
+
+### Generate production manifest.xml from manifest-local.xml
+
+Make all manifest changes to `manifest-local.xml`.
+
+When the local manifest changes run:
+
+> npm run update-manifest
+
+The command:
+
+- check that the local manifest is valid
+- generates the production `manifest.xml`
+- checks the production manifest is valid
+
+### Requirement Set
+
+The Manifest is set to require a specific Excel version to avoid having to support specific outdated browser versions.
+
+[ExcelApi Requirement Sets and Supported Office Versions](https://learn.microsoft.com/en-us/javascript/api/requirement-sets/excel/excel-api-requirement-sets#requirement-set-availability)

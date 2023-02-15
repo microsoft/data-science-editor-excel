@@ -1,4 +1,6 @@
+// eslint-disable-next-line @typescript-eslint/naming-convention
 export const DATA_SCIENCE_EXPORT_SHEET = "Data Science Editor Export";
+// eslint-disable-next-line @typescript-eslint/naming-convention
 export const DATA_SCIENCE_EXPORT_TABLE = "DataScienceEditorTable";
 
 export async function createTableForAddress(name: string, address: string): Promise<void> {
@@ -109,11 +111,9 @@ export async function insertTableFromDataset(dataset) {
     });
 }
 
-export async function getAllTables(): Promise<Excel.Table[]> {
-    return await Excel.run(async (context) => {
-        const tables = context.workbook.tables;
-        tables.load();
-        await context.sync();
-        return tables.items;
-    });
+export async function getAllTables(context: Excel.RequestContext): Promise<Excel.Table[]> {
+    const tables = context.workbook.tables;
+    tables.load();
+    await context.sync();
+    return tables.items;
 }
