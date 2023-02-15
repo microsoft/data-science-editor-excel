@@ -9,7 +9,7 @@
   <IconUrl DefaultValue="https://localhost:8080/assets/icon-32.png" />
   <HighResolutionIconUrl DefaultValue="https://localhost:8080/assets/icon-80.png"/>
   <!-- TODO: fix support url-->
-  <SupportUrl DefaultValue="https://localhost:8080/about.md"/>
+  <SupportUrl DefaultValue="https://microsoft.github.io/data-science-editor/about/"/>
   <AppDomains>
     <AppDomain>https://microsoft.github.io</AppDomain>
   </AppDomains>
@@ -88,7 +88,7 @@
       </bt:Images>
       <bt:Urls>
         <bt:Url id="Taskpane.Url" DefaultValue="https://localhost:8080/index.html" />
-        <bt:Url id="GetStarted.LearnMoreUrl" DefaultValue="http://go.microsoft.com/fwlink/?LinkId=276812" />
+        <bt:Url id="GetStarted.LearnMoreUrl" DefaultValue="https://microsoft.github.io/data-science-editor/about/" />
       </bt:Urls>
       <!-- ShortStrings max characters = 125 -->
       <bt:ShortStrings>
