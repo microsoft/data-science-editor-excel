@@ -7,7 +7,6 @@ Prototype integration of the [Data Science Editor](https://microsoft.github.io/d
 ## Developer Zone
 
 These instructions will show you how to build and debug the Office App locally.
-To file issues, use https://github.com/microsoft/data-science-editor/issues
 
 ## Getting Started
 
