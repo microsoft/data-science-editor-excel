@@ -88,7 +88,7 @@
       </bt:Images>
       <bt:Urls>
         <bt:Url id="Taskpane.Url" DefaultValue="https://microsoft.github.io/data-science-editor-excel/index.html" />
-        <bt:Url id="GetStarted.LearnMoreUrl" DefaultValue="https://microsoft.github.io/data-science-editor/about/" />
+        <bt:Url id="GetStarted.LearnMoreUrl" DefaultValue="https://microsoft.github.io/data-science-editor/excel/" />
       </bt:Urls>
       <!-- ShortStrings max characters = 125 -->
       <bt:ShortStrings>

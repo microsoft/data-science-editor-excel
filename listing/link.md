@@ -4,7 +4,7 @@
 
 ## Statements
 
-[about](https://microsoft.github.io/data-science-editor/about/)
+[about](https://microsoft.github.io/data-science-editor/excel/)
 
 [license](https://github.com/microsoft/data-science-editor/blob/main/LICENSE)
 
