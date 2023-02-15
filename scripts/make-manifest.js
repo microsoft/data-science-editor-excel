@@ -29,7 +29,7 @@ function production(data) {
     );
 
     // for production remove local prefix
-    data = data.replaceAll("(local) Data Science Editor", "Data Science Editor")
+    data = data.replaceAll("(local) Data Science Editor", "Data Science Editor");
     return clean(data);
 }
 

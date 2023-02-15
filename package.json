@@ -17,9 +17,13 @@
         "lint": "eslint --config ./config/eslint.json --no-eslintrc \"@(src|test|scripts)/**/*.@(ts|js)\"",
         "lint-fix": "eslint --config ./config/eslint.json --no-eslintrc --fix \"@(src|test|scripts)/**/*.@(ts|js)\"",
         "clean": "node ./scripts/clean.js dist && node ./scripts/clean.js temp",
+        "update-manifest": "npm run check-manifest-local && node ./scripts/make-manifest.js && npm run check-manifest",
         "make-manifest": "node ./scripts/make-manifest.js",
+        "check-manifest": "npx office-addin-manifest validate hosted_files/manifest.xml",
+        "check-manifest-local": "npx office-addin-manifest validate manifest-local.xml",
         "compile": "webpack",
-        "dev-server": "webpack-dev-server --mode development"
+        "dev-server": "webpack-dev-server --mode development",
+        "server": "npm run dev-server"
     },
     "repository": {
         "type": "git",

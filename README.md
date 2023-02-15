@@ -7,25 +7,21 @@ Contains prototype of Data Science Editor Office.js add-in.
 1. Download the latest LTS version of [node.js](https://nodejs.org/en/download/).
 1. Install all dependencies.
 
-```bash
-npm run install
-```
+> npm run install
+
 
 ## Build
 
 The following script will build and place assets in the dist directory:
 
-```bash
-npm run build
-```
+> npm run build
+
 
 ## Lint
 
 Runs prettier over all typescript files
 
-```back
-npm run lint
-```
+> npm run lint
 
 ## Manual Test
 
@@ -34,11 +30,28 @@ npm run lint
 1. [Manually sideload the add-in to Office on the web](https://learn.microsoft.com/en-us/office/dev/add-ins/testing/sideload-office-add-ins-for-testing#manually-sideload-an-add-in-to-office-on-the-web)
 1. select `manifest-local.xml`
 
-## Generate production manifest.xml from manifest-local.xml
+## Add-In Manifest
 
-> npm run make-manifest
+### Generate production manifest.xml from manifest-local.xml
+Make all manifest changes to `manifest-local.xml`.
 
-Do this any time the local manifest changes.
+When the local manifest changes run:
+
+> npm run update-manifest
+
+The command:
+
+- check that the local manifest is valid
+- generates the production `manifest.xml`
+- checks the production manifest is valid
+
+
+
+### Requirement Set
+
+The Manifest is set to require a specific Excel version to avoid having to support specific outdated browser versions.
+
+[ExcelApi Requirement Sets and Supported Office Versions](https://learn.microsoft.com/en-us/javascript/api/requirement-sets/excel/excel-api-requirement-sets#requirement-set-availability)
 
 ## Layout
 
