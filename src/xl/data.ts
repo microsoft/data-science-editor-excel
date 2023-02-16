@@ -1,21 +1,21 @@
 export type CellData = { [header: string]: string | number | boolean }[];
 
-export async function getSelectedData(): Promise<CellData> {
-    return await Excel.run(async (context) => {
-        const range = context.workbook.getSelectedRange();
+// export async function getSelectedData(): Promise<CellData> {
+//     return await Excel.run(async (context) => {
+//         const range = context.workbook.getSelectedRange();
 
-        return await getDataForRange(context, range);
-    });
-}
+//         return await getDataForRange(context, range);
+//     });
+// }
 
-export async function getDataForAddress(address: string): Promise<CellData> {
-    return await Excel.run(async (context) => {
-        const sheet = context.workbook.worksheets.getActiveWorksheet();
-        const range = sheet.getRange(address);
+// export async function getDataForAddress(address: string): Promise<CellData> {
+//     return await Excel.run(async (context) => {
+//         const sheet = context.workbook.worksheets.getActiveWorksheet();
+//         const range = sheet.getRange(address);
 
-        return await getDataForRange(context, range);
-    });
-}
+//         return await getDataForRange(context, range);
+//     });
+// }
 
 export async function getDataForTable(tableName: string): Promise<CellData> {
     return await Excel.run(async (context) => {

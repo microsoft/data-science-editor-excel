@@ -1,70 +1,81 @@
 import { saveSetting, loadSetting, SettingsKey } from "./xl/storage";
 import { blocks, category, transforms, setCurrentWorkspace } from "./blocks";
 import { getAllTables } from "./xl/tables";
-(() => {
-    const dseditor = document.getElementById("dseditor") as HTMLIFrameElement;
-    const post = (payload: {
-        // TODO: replace these types with the actual types
-        type?: "dsl";
-        action?: string;
-        dslid?: string;
-        options?: { table: [string, string][] };
-        editor?: string;
-        xml?: string;
-        json?: object;
-    }) => {
-        console.debug(`data blocks send`, payload);
-        dseditor.contentWindow.postMessage(payload, "*");
-    };
-    const postTables = async () => {
-        const table: [string, string][] = [];
-        await Excel.run(async (context) => {
-            const tables = await getAllTables(context);
-            for (const t of tables) {
-                if (t.name.charAt(0) !== "_") {
-                    table.push([t.name, t.name]);
-                }
-            }
-        });
 
-        post({
-            type: "dsl",
-            dslid: currentDslId,
-            action: "options",
-            options: {
-                table,
-            },
-        });
-    };
-    const handleBlocks = async (data) => {
-        console.debug(`hostdsl: sending blocks`);
-        post({ ...data, blocks, category });
-    };
-    const handleTransform = async (data) => {
-        const { blockId, workspace, dataset, ...rest } = data;
-        let result: object;
-        const block = workspace.blocks.find((b) => b.id === blockId);
-        if (!block) {
-            console.error(`block ${blockId} not found in workspace`);
-            result = { warning: "block lost" };
-        } else {
-            const transform = transforms[block.type];
-            result = await transform(block, dataset);
+interface DataScienceEditorPostPayload {
+    // TODO: replace these types with the actual types
+    type?: "dsl";
+    action?: string;
+    dslid?: string;
+    options?: { table: [string, string][] };
+    editor?: string;
+    xml?: string;
+    json?: object;
+}
+
+function post(payload: DataScienceEditorPostPayload) {
+    const dseditor = document.getElementById("dseditor") as HTMLIFrameElement;
+    if (!dseditor) {
+        console.debug(`dseditor undefined`);
+        return;
+    }
+    console.debug(`data blocks send`, payload);
+    dseditor.contentWindow.postMessage(payload, "*");
+}
+
+async function postTables(currentDslId: string) {
+    const table: [string, string][] = [];
+    await Excel.run(async (context) => {
+        const tables = await getAllTables(context);
+        for (const t of tables) {
+            if (t.name.charAt(0) !== "_") {
+                table.push([t.name, t.name]);
+            }
         }
-        post({ ...rest, ...(result || {}) });
-    };
+    });
+
+    post({
+        type: "dsl",
+        dslid: currentDslId,
+        action: "options",
+        options: {
+            table,
+        },
+    });
+}
+
+async function handleBlocks(data) {
+    console.debug(`hostdsl: sending blocks`);
+    post({ ...data, blocks, category });
+}
+
+async function handleTransform(data) {
+    const { blockId, workspace, dataset, ...rest } = data;
+    let result: object;
+    const block = workspace.blocks.find((b) => b.id === blockId);
+    if (!block) {
+        console.error(`block ${blockId} not found in workspace`);
+        result = { warning: "block lost" };
+    } else {
+        const transform = transforms[block.type];
+        result = await transform(block, dataset);
+    }
+    post({ ...rest, ...(result || {}) });
+}
+
+(() => {
     // editor identifier sent by the embedded block editor
     let currentDslId;
     let loaded = false;
     let pendingLoad: { editor: string; xml: string; json: object };
 
-    const tryloading = async () => {
+    const tryLoading = async () => {
         if (!pendingLoad || !currentDslId) return;
 
         const { editor, xml, json } = pendingLoad;
         console.debug(`settings.sending`, { editor, xml, json });
         pendingLoad = undefined;
-        await postTables();
+        await postTables(currentDslId);
         post({
             type: "dsl",
             action: "load",
@@ -85,7 +96,7 @@ import { getAllTables } from "./xl/tables";
             const parsed = JSON.parse(setting);
             pendingLoad = parsed;
             console.debug(`settings.found`, { toLoad: pendingLoad, setting });
-            tryloading();
+            tryLoading();
         });
 
         window.addEventListener(
@@ -110,7 +121,7 @@ import { getAllTables } from "./xl/tables";
                     case "mount": {
                         currentDslId = dslid;
                         console.debug(`dslid: ${dslid}`);
-                        tryloading();
+                        tryLoading();
                         break;
                     }
                     case "unmount": {
@@ -164,7 +175,7 @@ import { getAllTables } from "./xl/tables";
     });
 
     async function onTableChanged(eventArgs: Excel.TableChangedEventArgs) {
-        await postTables();
+        await postTables(currentDslId);
         await Excel.run(async (context) => {
             const sheet = context.workbook.worksheets.getActiveWorksheet();
             const table = sheet.tables.getItem(eventArgs.tableId);
