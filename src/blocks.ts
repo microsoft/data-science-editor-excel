@@ -2,12 +2,24 @@ import { getDataForTable } from "./xl/data";
 
 const colour = "#107C41";
 
-// export type Block = any;
+export interface Block {
+    kind: "block";
+    type: string;
+    message0: string;
+    colour: string;
+    args0: unknown[];
+    nextStatement: string;
+    dataPreviewField: boolean;
+    template: string;
+}
 // export type DataTable = any;
 
 export let currentWorkspace: unknown;
 
-export const blocks = [
+/**
+ * Definition of a block
+ */
+export const blocks: Block[] = [
     {
         kind: "block",
         type: "excel_import_table",
@@ -31,7 +43,7 @@ export const category = [
         kind: "category",
         name: "Tables",
         colour,
-        contents: blocks.map((block) => ({ kind: "block", type: block.type })),
+        contents: blocks.map(({ kind, type }) => ({ kind, type })),
         order: 100,
     },
 ];

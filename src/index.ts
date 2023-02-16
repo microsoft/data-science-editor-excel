@@ -52,7 +52,7 @@ async function handleBlocks(data) {
 async function handleTransform(data) {
     const { blockId, workspace, dataset, ...rest } = data;
     let result: object;
-    const block = workspace.blocks.find((b) => b.id === blockId);
+    const block = workspace.blocks.find(({ id }) => id === blockId);
     if (!block) {
         console.error(`block ${blockId} not found in workspace`);
         result = { warning: "block lost" };
@@ -85,6 +85,71 @@ async function handleTransform(data) {
         });
     };
 
+    const handleMessage = (
+        msg: MessageEvent<{
+            // TODO: replace these types with the actual types
+            type: string;
+            dslid: string;
+            action: string;
+            workspace: string;
+            editor: string;
+            xml: string;
+            json: string;
+        }>
+    ) => {
+        const { data } = msg;
+        if (data.type !== "dsl") {
+            return;
+        }
+        const { dslid, action } = data;
+        console.debug(action, data);
+        switch (action) {
+            case "mount": {
+                currentDslId = dslid;
+                console.debug(`dslid: ${dslid}`);
+                tryLoading();
+                break;
+            }
+            case "unmount": {
+                currentDslId = undefined;
+                break;
+            }
+            case "blocks": {
+                handleBlocks(data);
+                break;
+            }
+            case "transform": {
+                handleTransform(data);
+                break;
+            }
+            case "workspace": {
+                const { workspace } = data;
+                setCurrentWorkspace(workspace);
+                break;
+            }
+            case "save": {
+                // don't save until we've reloaded our content from excel
+                if (!loaded) {
+                    console.debug(`save.ignore: not loaded yet`);
+                    break;
+                }
+
+                const { editor, xml, json } = data;
+                const file = {
+                    editor,
+                    xml,
+                    json,
+                };
+                saveSetting(SettingsKey.EditorSaveData, JSON.stringify(file));
+                break;
+            }
+            case "change": {
+                handleTransform(data);
+                break;
+            }
+        }
+    };
+
     Office.onReady(() => {
         loadSetting(SettingsKey.EditorSaveData).then((setting) => {
             loaded = true;
@@ -99,72 +164,7 @@ async function handleTransform(data) {
             tryLoading();
         });
 
-        window.addEventListener(
-            "message",
-            (
-                msg: MessageEvent<{
-                    // TODO: replace these types with the actual types
-                    type: string;
-                    dslid: string;
-                    action: string;
-                    workspace: string;
-                    editor: string;
-                    xml: string;
-                    json: string;
-                }>
-            ) => {
-                const { data } = msg;
-                if (data.type !== "dsl") return;
-                const { dslid, action } = data;
-                console.debug(action, data);
-                switch (action) {
-                    case "mount": {
-                        currentDslId = dslid;
-                        console.debug(`dslid: ${dslid}`);
-                        tryLoading();
-                        break;
-                    }
-                    case "unmount": {
-                        currentDslId = undefined;
-                        break;
-                    }
-                    case "blocks": {
-                        handleBlocks(data);
-                        break;
-                    }
-                    case "transform": {
-                        handleTransform(data);
-                        break;
-                    }
-                    case "workspace": {
-                        const { workspace } = data;
-                        setCurrentWorkspace(workspace);
-                        break;
-                    }
-                    case "save": {
-                        // don't save until we've reloaded our content from excel
-                        if (!loaded) {
-                            console.debug(`save.ignore: not loaded yet`);
-                            break;
-                        }
-
-                        const { editor, xml, json } = data;
-                        const file = {
-                            editor,
-                            xml,
-                            json,
-                        };
-                        saveSetting(SettingsKey.EditorSaveData, JSON.stringify(file));
-                        break;
-                    }
-                    case "change": {
-                        handleTransform(data);
-                        break;
-                    }
-                }
-            },
-            false
-        );
+        window.addEventListener("message", handleMessage, false);
 
         Excel.run(async (context) => {
             console.debug(`dsl: initializing`);
