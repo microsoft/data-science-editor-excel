@@ -2,6 +2,8 @@
 
 Prototype integration of the [Data Science Editor](https://microsoft.github.io/data-science-editor/excel/) in Office for the Web.
 
+-   [Get it from the Office Store](https://appsource.microsoft.com/en-us/product/office/WA200005186?tab=Overview)
+
 ![A gif showcasing the app in action.](https://microsoft.github.io/data-science-editor-excel/hosted_files/editorHowTo.gif)
 
 ## Developer Zone
@@ -41,7 +43,6 @@ Runs prettier over all typescript files
 -   clone https://github.com/microsoft/data-science-editor and follow instructions to launch dev server
 -   update `localhost` to true in webpack.config.js and rebuild
 
-
 ## Architecture
 
 This add-in is a host to an iframe that holds the data science editor. This Add-In provides the interface to allow the data-science editor to interact with Excel.
@@ -52,21 +53,22 @@ This add-in is complete static and hosted on a github pages site.
 
 Layout of folders
 
-- **assets**
-    - image assets
-- **src**
-    - source code for the add-in
-- **listing**
-    - descriptions for the add-in store listing
-- **hosted_files**
-    - additional hosted files
-- **scripts**
-    - development scripts
-- **config**
-    - tooling configuration files
+-   **assets**
+    -   image assets
+-   **src**
+    -   source code for the add-in
+-   **listing**
+    -   descriptions for the add-in store listing
+-   **hosted_files**
+    -   additional hosted files
+-   **scripts**
+    -   development scripts
+-   **config**
 
-- **dist**
-    - the build site, this is the exact layout hosted
+    -   tooling configuration files
+
+-   **dist**
+    -   the build site, this is the exact layout hosted
 
 ## Add-In Manifest
 
@@ -80,9 +82,9 @@ When the local manifest changes run:
 
 The command:
 
-- check that the local manifest is valid
-- generates the production `manifest.xml`
-- checks the production manifest is valid
+-   check that the local manifest is valid
+-   generates the production `manifest.xml`
+-   checks the production manifest is valid
 
 ### Requirement Set
 
