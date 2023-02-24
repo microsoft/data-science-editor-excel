@@ -4,7 +4,7 @@ Prototype integration of the [Data Science Editor](https://microsoft.github.io/d
 
 -   [Get it from the Office Store](https://appsource.microsoft.com/en-us/product/office/WA200005186?tab=Overview)
 
-![A gif showcasing the app in action.](https://microsoft.github.io/data-science-editor-excel/hosted_files/editorHowTo.gif)
+![A gif showcasing the app in action.](https://microsoft.github.io/data-science-editor-excel/hosted_files/getting-started.gif)
 
 ## Developer Zone
 
