@@ -1,5 +1,6 @@
 import { writeDataToSheet } from "./xl/writeDataToSheet";
 import { getDataForTable } from "./xl/data";
+import { DATA_SCIENCE_STATEMENT_TYPE } from "./constants";
 
 const colour = "#107C41";
 
@@ -25,7 +26,7 @@ export const blocks = [
                 dataId: "table",
             },
         ],
-        nextStatement: "DataScienceStatement",
+        nextStatement: DATA_SCIENCE_STATEMENT_TYPE,
         dataPreviewField: true,
         template: "meta",
     },
@@ -35,16 +36,21 @@ export const blocks = [
         kind: "block",
         type: "excelExportDataToSheet",
         message0: "export data to sheet %1",
+        tooltip: "look a tooltip",
         colour,
         args0: [
             {
-                type: "string",
+                // there are some restrictions to this field
+                // must be a valid table or sheet name
+                // to simplify - no spaces only [a-z][A_Z] characters
+                type: "field_input",
                 name: argumentNameExportDataToSheetName,
-                dataId: "table",
+                spellcheck: false,
+                //dataId: "table",
             },
         ],
-        previousStatement: "DataScienceStatement",
-        nextStatement: "DataScienceStatement",
+        previousStatement: DATA_SCIENCE_STATEMENT_TYPE,
+        nextStatement: DATA_SCIENCE_STATEMENT_TYPE,
         dataPreviewField: false,
         template: "meta",
     },
@@ -76,15 +82,33 @@ export const transforms = {
         return { dataset };
     },
 
-    excelExportData: async (b) => {
+    excelExportDataToSheet: async (b, data: { [key: string]: string | number }[]) => {
         console.log("excel_export_data");
+        console.log(b);
+        console.log(data);
+        debugger;
         const sheetName = b.inputs[0].fields[argumentNameExportDataToSheetName].value;
         if (!sheetName) {
             console.debug(`table.write no sheet selected`);
             return { dataset: [] };
         }
 
-        writeDataToSheet(sheetName, ["test"]);
+        // Data is an array of objects that have properties
+        // only consider the first object properties
+        const headers: string[] = [];
+        if (data.length > 0) {
+            headers.push(...Object.getOwnPropertyNames(data[0]));
+        }
+
+        const rows = data.map((o) => {
+            const row = headers.map((name) => o[name]);
+            return row;
+        });
+
+        // when typing each character alters the sheet name.
+        // would need to constantly rename sheet?
+        writeDataToSheet(sheetName, headers, rows);
+        return data;
     },
 };
 
