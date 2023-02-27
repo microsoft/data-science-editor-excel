@@ -66,6 +66,8 @@ export const category = [
     },
 ];
 
+
+
 export const transforms = {
     // don't rename these identifiers, they are used in the serialized blocky and will break existing files
     // eslint-disable-next-line @typescript-eslint/naming-convention
@@ -86,6 +88,10 @@ export const transforms = {
         console.log("excel_export_data");
         console.log(b);
         console.log(data);
+         // block id stays fixed as long as the block exists
+         // this allows tracking of the specific block across calls
+         // track all block ids and associate a worksheetId with each of them
+        const blockId = b.id;
         debugger;
         const sheetName = b.inputs[0].fields[argumentNameExportDataToSheetName].value;
         if (!sheetName) {
