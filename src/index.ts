@@ -116,7 +116,6 @@ async function handleTransform(data) {
                 const { data } = msg;
                 if (data.type !== "dsl") return;
                 const { dslid, action } = data;
-                console.debug(action, data);
                 switch (action) {
                     case "mount": {
                         currentDslId = dslid;
